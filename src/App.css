@@ -1,0 +1,122 @@
+.app {
+  max-width: 900px;
+  margin: auto;
+  text-align: center;
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+.todo-container {
+  max-width: 100%;
+  margin-top: 0px;
+}
+
+.todo-container h1 {
+  text-transform: uppercase;
+  background-color: #aca8a8;
+  padding: 10px;
+}
+
+.todo-container div {
+  padding: 10px;
+  list-style: none;
+}
+
+form {
+  display: flex;
+  justify-content: space-between;
+  max-width: 100%;
+}
+
+.todo {
+  max-width: 100%;
+}
+
+input {
+  padding: 10px;
+  border: 1px solid #efefef;
+  border-radius: 5px;
+  outline: none;
+  font-size: 16px;
+}
+
+.todo input {
+  width: 95%;
+}
+
+button {
+  border: none;
+  font-size: 14px;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.add-btn {
+  padding: 10px 20px;
+  color: black;
+  border-radius: 5px;
+  margin-left: -50px;
+  font-weight: bold;
+  font-size: 20px;
+}
+
+.add-btn:hover {
+  background-color: gray;
+}
+
+.edit-btn {
+  color: blue;
+  padding: 10px;
+  margin-right: 10px;
+}
+
+.del-btn {
+  color: red;
+  padding: 10px;
+}
+
+.flash {
+  box-shadow: 0 0 2px 1px red;
+  transition: box-shadow 100ms ease-out;
+}
+
+.todo-list {
+  list-style: none;
+  display: flex;
+  justify-content: space-between;
+  background-color: white;
+  box-shadow: 0px 0px 6px #ccc;
+  margin-bottom: 10px;
+  align-items: center;
+}
+
+ul {
+  background-color: #eee;
+  padding: 20px;
+}
+
+.todo-list span {
+  font-size: 18px;
+  margin-left: 10px;
+  padding: 5px;
+}
+
+.highlight-wrapper {
+  max-width: 100%;
+  text-align: left;
+  font-size: 18px;
+  margin-top: -10px;
+  display: flex;
+}
+
+.highlight-wrapper p {
+  max-width: max-content;
+  height: 20px;
+  margin-top: 10px;
+  margin-left: -5px;
+}
+
+.highlight-wrapper input {
+  margin-left: 10px;
+  width: 75%;
+  height: 20px;
+}
