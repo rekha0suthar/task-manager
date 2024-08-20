@@ -20,7 +20,7 @@ const renderHighLight = (title, query) => {
   );
 };
 
-const TodoItem = ({ id, title, completed }) => {
+const TodoItem = ({ id, title, completed, dueDate }) => {
   const { getQuery } = useQuery();
   const deleteTodo = useDeleteTodo();
   const toggleTodo = useToggleTodo();
@@ -57,6 +57,7 @@ const TodoItem = ({ id, title, completed }) => {
               if (e.key === 'Enter') handleSave();
               if (e.key === 'Escape') handleCancel();
             }}
+            className="title-edit"
           />
         ) : (
           <span style={{ textDecoration: completed ? 'line-through' : 'none' }}>
@@ -64,6 +65,7 @@ const TodoItem = ({ id, title, completed }) => {
           </span>
         )}
       </div>
+      <p className="due-date">{dueDate && ` Due: ${dueDate}`}</p>
 
       <div>
         {isEditing ? (
