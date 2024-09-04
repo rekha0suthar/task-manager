@@ -31,4 +31,13 @@ const useSetDraft = () => {
   );
 };
 
-export { Provider, useTrackedState, useSetDraft };
+const saveTasks = (tasks) => {
+  window.localStorage.setItem('tasks', JSON.stringify(tasks));
+};
+
+const getTasks = () => {
+  const tasks = window.localStorage.getItem('tasks');
+  return tasks ? JSON.parse(tasks) : [];
+};
+
+export { Provider, useTrackedState, useSetDraft, saveTasks, getTasks };
