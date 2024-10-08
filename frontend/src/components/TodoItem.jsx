@@ -1,36 +1,23 @@
 import React, { useState } from 'react';
-import { useQuery } from '../hooks/useQuery';
-import { useDeleteTodo } from '../hooks/useDeleteTodo';
-import { useToggleTodo } from '../hooks/useToggleTodo';
-import { useEditTodo } from '../hooks/useEditTodo'; // Import the edit hook
+
 import { MdDelete, MdEdit } from 'react-icons/md';
 import { FaCheck } from 'react-icons/fa6';
 import { IoClose } from 'react-icons/io5';
+import { editTodo, deleteTodo, toggleTodo } from '../utils';
 
-const renderHighLight = (title, query) => {
-  if (!query) return title;
-  const index = title.indexOf(query);
-  if (index === -1) return title;
-  return (
-    <React.Fragment>
-      {title.slice(0, index)}
-      <b>{query}</b>
-      {title.slice(index + query.length)}
-    </React.Fragment>
-  );
-};
-
-const TodoItem = ({ id, title, completed, dueDate }) => {
-  const { getQuery } = useQuery();
-  const deleteTodo = useDeleteTodo();
-  const toggleTodo = useToggleTodo();
-  const editTodo = useEditTodo(); // Hook for editing todos
-
+const TodoItem = ({ id, title, completed, dueDate, setTodos }) => {
   const [isEditing, setIsEditing] = useState(false); // Track edit mode
   const [newTitle, setNewTitle] = useState(title); // Store new title
 
+  // fetch updated list of todos after deleting
+  const fetchTodos = async () => {
+    const response = await fetch('http://localhost:5000/api/todos');
+    const data = await response.json();
+    setTodos(data);
+  };
+
   const handleSave = () => {
-    editTodo(id, newTitle); // Save changes
+    editTodo(id, newTitle, fetchTodos); // Save changes
     setIsEditing(false); // Exit edit mode
   };
 
@@ -45,7 +32,7 @@ const TodoItem = ({ id, title, completed, dueDate }) => {
         <input
           type="checkbox"
           checked={!!completed}
-          onChange={() => toggleTodo(id)}
+          onChange={() => toggleTodo(id, !completed, fetchTodos)}
         />
 
         {isEditing ? (
@@ -61,7 +48,7 @@ const TodoItem = ({ id, title, completed, dueDate }) => {
           />
         ) : (
           <span style={{ textDecoration: completed ? 'line-through' : 'none' }}>
-            {completed ? title : renderHighLight(title, getQuery())}
+            {title}
           </span>
         )}
       </div>
@@ -82,7 +69,10 @@ const TodoItem = ({ id, title, completed, dueDate }) => {
             <button className="edit-btn" onClick={() => setIsEditing(true)}>
               <MdEdit /> {/* Edit icon */}
             </button>
-            <button className="del-btn" onClick={() => deleteTodo(id)}>
+            <button
+              className="del-btn"
+              onClick={() => deleteTodo(id, fetchTodos)}
+            >
               <MdDelete /> {/* Delete icon */}
             </button>
           </>

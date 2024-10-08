@@ -1,21 +1,31 @@
 import React, { useState } from 'react';
-// import { useFlasher } from '../utils';
-import { useAddTodo } from '../hooks/useAddTodo';
 import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css'; // Import DatePicker styles
 import { MdCalendarToday } from 'react-icons/md'; // Import calendar icon
 
-const NewTodo = () => {
-  const addTodo = useAddTodo();
+const NewTodo = ({ todos, setTodos }) => {
   const [text, setText] = useState('');
   const [dueDate, setDueDate] = useState(null);
   const [isCalendarOpen, setIsCalendarOpen] = useState(false); // Track whether calendar is open
+
+  const addTodo = async (newTodo) => {
+    const response = await fetch('http://localhost:5000/api/todos', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(newTodo),
+    });
+    const savedTodo = await response.json();
+    setTodos([...todos, savedTodo]);
+  };
 
   const handleTodo = (e) => {
     e.preventDefault();
 
     if (text.trim()) {
-      addTodo({ title: text, dueDate });
+      const newTodo = { title: text, dueDate };
+      addTodo(newTodo);
       setText('');
       setDueDate(null);
       setIsCalendarOpen(false); // Close calendar after submission
