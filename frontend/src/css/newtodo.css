@@ -1,0 +1,38 @@
+form {
+  display: flex;
+  justify-content: space-between;
+  max-width: 100%;
+}
+
+.calendar {
+  z-index: 100;
+  position: fixed;
+  right: 0;
+  top: 15%;
+}
+
+.calendar-icon {
+  margin-top: 10px;
+  margin-left: -150px;
+}
+
+.todo {
+  max-width: 100%;
+}
+
+.todo input {
+  width: 95%;
+}
+
+.add-btn {
+  padding: 10px 20px;
+  color: black;
+  border-radius: 5px;
+  margin-left: -50px;
+  font-weight: bold;
+  font-size: 20px;
+}
+
+.add-btn:hover {
+  background-color: gray;
+}

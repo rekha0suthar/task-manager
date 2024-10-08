@@ -1,13 +1,21 @@
 import React, { useState } from 'react';
-
 import { MdDelete, MdEdit } from 'react-icons/md';
 import { FaCheck } from 'react-icons/fa6';
 import { IoClose } from 'react-icons/io5';
 import { editTodo, deleteTodo, toggleTodo } from '../utils';
+import '../css/todoitem.css';
 
 const TodoItem = ({ id, title, completed, dueDate, setTodos }) => {
   const [isEditing, setIsEditing] = useState(false); // Track edit mode
   const [newTitle, setNewTitle] = useState(title); // Store new title
+
+  const checkDueDate = () => {
+    if (!dueDate) return false;
+    const today = new Date();
+    const taskDueDate = new Date(dueDate);
+
+    return today > taskDueDate;
+  };
 
   // fetch updated list of todos after deleting
   const fetchTodos = async () => {
@@ -27,7 +35,7 @@ const TodoItem = ({ id, title, completed, dueDate, setTodos }) => {
   };
 
   return (
-    <li className="todo-list">
+    <li className="todo-item">
       <div>
         <input
           type="checkbox"
@@ -47,12 +55,19 @@ const TodoItem = ({ id, title, completed, dueDate, setTodos }) => {
             className="title-edit"
           />
         ) : (
-          <span style={{ textDecoration: completed ? 'line-through' : 'none' }}>
+          <span
+            style={{
+              textDecoration: completed ? 'line-through' : 'none',
+              color: completed ? '#ccc' : '#000',
+            }}
+          >
             {title}
           </span>
         )}
       </div>
-      <p className="due-date">{dueDate && ` Due: ${dueDate}`}</p>
+      <p className="due-date" style={{ color: checkDueDate() && 'red' }}>
+        {dueDate && ` Due: ${checkDueDate() ? 'Due date passed' : dueDate}`}
+      </p>
 
       <div>
         {isEditing ? (

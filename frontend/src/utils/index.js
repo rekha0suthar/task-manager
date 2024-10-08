@@ -13,9 +13,6 @@ const updateTodo = async (id, updates, fetchTodos) => {
       throw new Error('Failed to update the todo');
     }
 
-    const updatedTodo = await response.json();
-    console.log('Updated todo:', updatedTodo);
-
     // Refetch the updated todo list
     fetchTodos();
   } catch (error) {
@@ -33,8 +30,6 @@ export const deleteTodo = async (id, fetchTodos) => {
     if (!response.ok) {
       throw new Error('Failed to delete the todo');
     }
-    const meg = await response.json();
-    console.log(meg);
 
     fetchTodos();
   } catch (error) {

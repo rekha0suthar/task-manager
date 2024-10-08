@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css'; // Import DatePicker styles
 import { MdCalendarToday } from 'react-icons/md'; // Import calendar icon
+import '../css/newtodo.css';
 
 const NewTodo = ({ todos, setTodos }) => {
   const [text, setText] = useState('');
