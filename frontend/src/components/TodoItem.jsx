@@ -9,15 +9,30 @@ const TodoItem = ({ id, title, completed, dueDate, setTodos }) => {
   const [isEditing, setIsEditing] = useState(false); // Track edit mode
   const [newTitle, setNewTitle] = useState(title); // Store new title
 
-  const checkDueDate = () => {
-    if (!dueDate) return false;
-    const today = new Date();
-    const taskDueDate = new Date(dueDate);
+  const getDueDateText = () => {
+    console.log(dueDate);
+    if (dueDate === 'No due date') return 'No due date';
 
-    return today > taskDueDate;
+    // Parse both dates to UTC date-only format
+    const today = new Date(
+      Date.UTC(
+        new Date().getUTCFullYear(),
+        new Date().getUTCMonth(),
+        new Date().getUTCDate()
+      )
+    );
+    const taskDueDate = new Date(
+      Date.UTC(
+        new Date(dueDate).getUTCFullYear(),
+        new Date(dueDate).getUTCMonth(),
+        new Date(dueDate).getUTCDate()
+      )
+    );
+
+    return taskDueDate < today ? dueDate : 'Due date passed';
   };
 
-  // fetch updated list of todos after deleting
+  // Fetch updated list of todos after deletion
   const fetchTodos = async () => {
     const response = await fetch('http://localhost:5000/api/todos');
     const data = await response.json();
@@ -34,6 +49,8 @@ const TodoItem = ({ id, title, completed, dueDate, setTodos }) => {
     setIsEditing(false); // Exit edit mode
   };
 
+  const dueDateText = getDueDateText();
+
   return (
     <li className="todo-item">
       <div>
@@ -41,6 +58,7 @@ const TodoItem = ({ id, title, completed, dueDate, setTodos }) => {
           type="checkbox"
           checked={!!completed}
           onChange={() => toggleTodo(id, !completed, fetchTodos)}
+          aria-label="Mark task as complete"
         />
 
         {isEditing ? (
@@ -53,6 +71,7 @@ const TodoItem = ({ id, title, completed, dueDate, setTodos }) => {
               if (e.key === 'Escape') handleCancel();
             }}
             className="title-edit"
+            aria-label="Edit task title"
           />
         ) : (
           <span
@@ -65,30 +84,48 @@ const TodoItem = ({ id, title, completed, dueDate, setTodos }) => {
           </span>
         )}
       </div>
-      <p className="due-date" style={{ color: checkDueDate() && 'red' }}>
-        {dueDate && ` Due: ${checkDueDate() ? 'Due date passed' : dueDate}`}
+      <p
+        className="due-date"
+        style={{
+          color: dueDateText === 'Due date passed' ? 'red' : undefined,
+        }}
+      >
+        {dueDateText}
       </p>
 
       <div>
         {isEditing ? (
           <>
-            <button className="edit-btn" onClick={handleSave}>
-              <FaCheck /> {/* Save icon */}
+            <button
+              className="edit-btn"
+              onClick={handleSave}
+              aria-label="Save changes"
+            >
+              <FaCheck />
             </button>
-            <button className="del-btn" onClick={handleCancel}>
-              <IoClose /> {/* Cancel icon */}
+            <button
+              className="del-btn"
+              onClick={handleCancel}
+              aria-label="Cancel editing"
+            >
+              <IoClose />
             </button>
           </>
         ) : (
           <>
-            <button className="edit-btn" onClick={() => setIsEditing(true)}>
-              <MdEdit /> {/* Edit icon */}
+            <button
+              className="edit-btn"
+              onClick={() => setIsEditing(true)}
+              aria-label="Edit task"
+            >
+              <MdEdit />
             </button>
             <button
               className="del-btn"
               onClick={() => deleteTodo(id, fetchTodos)}
+              aria-label="Delete task"
             >
-              <MdDelete /> {/* Delete icon */}
+              <MdDelete />
             </button>
           </>
         )}

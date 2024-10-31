@@ -9,6 +9,7 @@ const app = express();
 
 // Middleware
 app.use(cors());
+//body parser middleware
 app.use(express.json());
 
 // Routes
