@@ -10,7 +10,7 @@ const NewTodo = ({ todos, setTodos }) => {
   const [isCalendarOpen, setIsCalendarOpen] = useState(false); // Track whether calendar is open
 
   const addTodo = async (newTodo) => {
-    const response = await fetch('http://localhost:5000/api/todos', {
+    const response = await fetch('https://task-manager-backend-tau-lemon.vercel.app/api/todos', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
