@@ -34,7 +34,7 @@ const TodoItem = ({ id, title, completed, dueDate, setTodos }) => {
 
   // Fetch updated list of todos after deletion
   const fetchTodos = async () => {
-    const response = await fetch('http://localhost:5000/api/todos');
+    const response = await fetch('https://task-manager-backend-tau-lemon.vercel.app/api/todos');
     const data = await response.json();
     setTodos(data);
   };
