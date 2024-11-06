@@ -1,7 +1,7 @@
 // Common function to update a todo (for both editing and toggling)
 const updateTodo = async (id, updates, fetchTodos) => {
   try {
-    const response = await fetch(`http://localhost:5000/api/todos/${id}`, {
+    const response = await fetch(`https://task-manager-backend-tau-lemon.vercel.app/api/todos/${id}`, {
       method: 'PUT',
       headers: {
         'Content-Type': 'application/json',
@@ -24,7 +24,7 @@ const updateTodo = async (id, updates, fetchTodos) => {
 export const deleteTodo = async (id, fetchTodos) => {
   try {
     // sending delete request
-    const response = await fetch(`http://localhost:5000/api/todos/${id}`, {
+    const response = await fetch(`https://task-manager-backend-tau-lemon.vercel.app/api/todos/${id}`, {
       method: 'DELETE',
     });
     if (!response.ok) {
