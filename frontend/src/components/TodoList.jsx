@@ -14,7 +14,7 @@ const TodoList = () => {
 
   useEffect(() => {
     const fetchTodos = async () => {
-      const response = await fetch('http://localhost:5000/api/todos');
+      const response = await fetch('http://localhost:5000/https://task-manager-backend-tau-lemon.vercel.app/api/todos');
       const data = await response.json();
       setTodos(data);
     };
