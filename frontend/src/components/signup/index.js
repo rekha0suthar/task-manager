@@ -47,10 +47,10 @@ const Signup = () => {
   return (
     <div className="login-container">
       <div className="login-containerv2">
-        <h3>Create your account</h3>
+        <h2>Create your account</h2>
 
         <div className="input-container">
-          <label>FRIST NAME</label>
+          <label>FIRST NAME</label>
           <input
             onChange={handleChange}
             name="firstName"

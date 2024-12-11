@@ -27,7 +27,7 @@ const Login = () => {
   return (
     <div className="login-container">
       <div className="login-containerv2">
-        <h3>Welcome back</h3>
+        <h2>Welcome back</h2>
 
         <div className="input-container">
           <label>EMAIL</label>

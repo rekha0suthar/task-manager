@@ -23,10 +23,11 @@
   padding: 20px;
   border-radius: 0.5rem;
 }
-.login-containerv2 h3 {
+.login-containerv2 h2 {
   font-weight: 600;
   text-align: center;
   margin-bottom: 20px;
+  margin-top: 0px;
 }
 
 .input-container label {
