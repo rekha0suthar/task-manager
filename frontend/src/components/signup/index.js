@@ -3,6 +3,7 @@ import './signup.css';
 import { Link, useNavigate } from 'react-router-dom';
 import { useGoogleLogin } from '@react-oauth/google';
 import { signup, signupGoogle } from '../../utils';
+import { FaGoogle } from 'react-icons/fa';
 
 const InitState = {
   firstName: '',
@@ -15,6 +16,7 @@ const InitState = {
 const Signup = () => {
   const nagivate = useNavigate();
   const [sForm, setsForm] = useState(InitState);
+  const [loading, setLoading] = useState(false);
 
   const handleChange = (e) =>
     setsForm({
@@ -25,7 +27,7 @@ const Signup = () => {
   function handleGoogleLoginSuccess(tokenResponse) {
     const accessToken = tokenResponse.access_token;
 
-    signupGoogle(accessToken, nagivate);
+    signupGoogle(accessToken, nagivate, setLoading);
   }
 
   function handleOnSubmit(e) {
@@ -39,7 +41,7 @@ const Signup = () => {
       sForm.password === sForm.confirmPassword &&
       sForm.password.length >= 4
     ) {
-      signup(sForm, nagivate);
+      signup(sForm, nagivate, setLoading);
     }
   }
 
@@ -97,7 +99,7 @@ const Signup = () => {
           />
         </div>
 
-        <div className="d">
+        <div>
           <div>
             Already Signed Up? <Link to="/">Login</Link>
           </div>
@@ -107,11 +109,12 @@ const Signup = () => {
         </div>
 
         <button onClick={handleOnSubmit} className="login-btn">
-          REGISTER
+          {loading ? 'Registering, please wait' : 'REGISTER'}
         </button>
         <span className="or">or</span>
         <button onClick={() => login()} className="google-btn">
-          <i className="fa-brands fa-google"></i> Sign up with google
+          <FaGoogle />{' '}
+          {loading ? 'Signing in, please wait' : 'Sign up with google'}
         </button>
       </div>
     </div>

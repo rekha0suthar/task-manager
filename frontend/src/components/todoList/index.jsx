@@ -16,8 +16,12 @@ const TodoList = () => {
 
   useEffect(() => {
     const fetchTodos = async () => {
-      const { data } = await getTasks();
-      setTodos(data);
+      try {
+        const { data } = await getTasks();
+        setTodos(data);
+      } catch (err) {
+        console.log(err);
+      }
     };
     fetchTodos();
   }, []);
@@ -35,6 +39,7 @@ const TodoList = () => {
           <h2>Incomplete Tasks: ({filteredAndSortedTodos(false).length})</h2>
 
           {/* List Incomplete Todos */}
+
           <Todo
             filteredAndSortedTodos={filteredAndSortedTodos}
             setTodos={setTodos}

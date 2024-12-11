@@ -55,7 +55,7 @@ const TodoItem = ({ id, title, completed, dueDate, setTodos }) => {
 
   return (
     <li className="todo-item">
-      <div>
+      <div style={{ width: '200px' }}>
         <input
           type="checkbox"
           checked={!!completed}
@@ -74,16 +74,14 @@ const TodoItem = ({ id, title, completed, dueDate, setTodos }) => {
             }}
             className="title-edit"
             aria-label="Edit task title"
-            style={{ width: '100%' }}
           />
         ) : (
           <span
             style={{
               textDecoration: completed ? 'line-through' : 'none',
               color: completed ? '#ccc' : '#000',
-              maxWidth: '100px',
-              wordBreak: 'break-all',
             }}
+            className="task-title"
           >
             {title}
           </span>
@@ -100,7 +98,7 @@ const TodoItem = ({ id, title, completed, dueDate, setTodos }) => {
 
       <div>
         {isEditing ? (
-          <div>
+          <>
             <button
               className="edit-btn"
               onClick={handleSave}
@@ -115,9 +113,9 @@ const TodoItem = ({ id, title, completed, dueDate, setTodos }) => {
             >
               <IoClose />
             </button>
-          </div>
+          </>
         ) : (
-          <div>
+          <>
             <button
               className="edit-btn"
               onClick={() => setIsEditing(true)}
@@ -132,7 +130,7 @@ const TodoItem = ({ id, title, completed, dueDate, setTodos }) => {
             >
               <MdDelete />
             </button>
-          </div>
+          </>
         )}
       </div>
     </li>

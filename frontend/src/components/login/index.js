@@ -3,24 +3,26 @@ import { Link, useNavigate } from 'react-router-dom';
 import './login.css';
 import { useGoogleLogin } from '@react-oauth/google';
 import { signinGoogle, signin } from '../../utils';
+import { FaGoogle } from 'react-icons/fa';
 
 const Login = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [loading, setLoading] = useState(false);
 
   const navigate = useNavigate();
 
   function handleGoogleLoginSuccess(tokenResponse) {
     const accessToken = tokenResponse.access_token;
 
-    signinGoogle(accessToken, navigate);
+    signinGoogle(accessToken, navigate, setLoading);
   }
   const login = useGoogleLogin({ onSuccess: handleGoogleLoginSuccess });
 
   function handleSubmit(e) {
     e.preventDefault();
     if (email !== '' && password !== '') {
-      signin({ email, password }, navigate);
+      signin({ email, password }, navigate, setLoading);
     }
   }
 
@@ -57,11 +59,12 @@ const Login = () => {
         </div>
 
         <button onClick={handleSubmit} className="login-btn">
-          LOGIN
+          {loading ? 'Signing in please wait' : 'SIGNIN'}
         </button>
         <span className="or">or</span>
         <button onClick={() => login()} className="google-btn">
-          <i className="fa-brands fa-google"></i> Sign in with google
+          <FaGoogle />{' '}
+          {loading ? 'Signing in please wait' : 'Sign in with google'}
         </button>
 
         <span className="notreg">

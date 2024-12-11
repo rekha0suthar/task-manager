@@ -16,7 +16,7 @@
   color: #524e4e;
   position: absolute;
   left: 20px;
-  bottom: 0%;
+  bottom: -10%;
 }
 
 .edit-btn {
@@ -30,14 +30,17 @@
   background-color: transparent;
 }
 
-.todo-item span {
+.task-title {
   font-size: 18px;
   padding: 5px;
   text-transform: capitalize;
+  word-break: break-all;
 }
 
 .title-edit {
   margin-bottom: 20px;
+  margin-left: 5px;
+  width: 150px;
 }
 
 button {
