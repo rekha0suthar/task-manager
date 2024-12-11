@@ -24,7 +24,7 @@ export const signUpGoogle = (accessToken) =>
   API.post('/users/signup', {
     googleAccessToken: accessToken,
   });
-
+export const resetPassword = (data) => API.put('/users/reset-password', data);
 export const getUser = (userId) => API.get(`/users/${userId}`);
 
 //Task APIs

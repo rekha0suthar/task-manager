@@ -34,6 +34,7 @@ const Login = () => {
         <div className="input-container">
           <label>EMAIL</label>
           <input
+            value={email}
             onChange={(e) => setEmail(e.target.value)}
             placeholder="Enter your email"
             type="email"
@@ -43,6 +44,7 @@ const Login = () => {
         <div className="input-container">
           <label>PASSWORD</label>
           <input
+            value={password}
             onChange={(e) => setPassword(e.target.value)}
             placeholder="Enter your password"
             type="password"
@@ -53,9 +55,7 @@ const Login = () => {
           <div>
             <input type="checkbox" /> Remember Me
           </div>
-          {/* <div>
-            <Link to="/account/forgotpassowrd">Forgot password?</Link>
-          </div> */}
+          <Link to="/forgot-password">Forgot password</Link>
         </div>
 
         <button onClick={handleSubmit} className="login-btn">

@@ -5,12 +5,16 @@ import Signup from '../components/signup';
 import TodoList from '../components/todoList';
 import { ProtectedRoute } from './ProtectedRoute';
 import UserProfile from '../components/profile';
+import ForgotPassword from '../components/forgotPassword';
+import ResetPassword from '../components/ResetPassword';
 
 const Router = () => {
   return (
     <Routes>
       <Route path="/" element={<Login />} />
       <Route path="/signup" element={<Signup />} />
+      <Route path="/forgot-password" element={<ForgotPassword />} />
+      <Route path="/reset-password" element={<ResetPassword />} />
       <Route element={<ProtectedRoute />}>
         <Route path="/dashboard" element={<TodoList />} />
         <Route path="/profile" element={<UserProfile />} />
