@@ -20,7 +20,7 @@ const Todo = ({ filteredAndSortedTodos, setTodos, isCompleted }) => {
           )
         )
       ) : (
-        <p>No Pending Tasks</p>
+        <p className="dummy-text">No Pending Tasks</p>
       )}
     </ul>
   );
