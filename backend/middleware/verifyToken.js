@@ -1,5 +1,4 @@
 import jwt from 'jsonwebtoken';
-import config from 'config';
 
 export const verifyToken = (req, res, next) => {
   try {
