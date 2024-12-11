@@ -1,0 +1,52 @@
+.todo-item {
+  list-style: none;
+  display: flex;
+  justify-content: space-between;
+  background-color: white;
+  box-shadow: 0px 0px 6px #ccc;
+  margin-bottom: 10px;
+  align-items: center;
+  padding-bottom: 20px;
+  position: relative;
+}
+
+.todo-item .due-date {
+  padding: 10px;
+  font-size: 12px;
+  color: #524e4e;
+  position: absolute;
+  left: 20px;
+  bottom: 0%;
+}
+
+.edit-btn {
+  color: blue;
+  margin-right: 10px;
+  background-color: transparent;
+}
+
+.del-btn {
+  color: red;
+  background-color: transparent;
+}
+
+.todo-item span {
+  font-size: 18px;
+  padding: 5px;
+  text-transform: capitalize;
+}
+
+.title-edit {
+  margin-bottom: 20px;
+}
+
+button {
+  border: none;
+}
+
+input {
+  border: 1px solid #ccc;
+  border-radius: 10px;
+  padding: 10px;
+  outline: none;
+}

@@ -2,6 +2,7 @@ import React from 'react';
 import './nav.css';
 import { Link, useNavigate } from 'react-router-dom';
 import { AiOutlineLogout } from 'react-icons/ai';
+import { FaUser } from 'react-icons/fa';
 
 const Nav = () => {
   const navigate = useNavigate();
@@ -19,7 +20,7 @@ const Nav = () => {
         {token && (
           <div className="nav-user">
             <Link to="/profile" aria-label="Go to profile">
-              <i className="fa-solid fa-user"></i>
+              <FaUser />
             </Link>
             <div
               onClick={handleLogOut}

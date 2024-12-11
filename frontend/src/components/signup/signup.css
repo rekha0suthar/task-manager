@@ -34,6 +34,7 @@
   display: block;
   margin-top: 20px;
   font-weight: 600;
+  font-size: 16px;
 }
 
 .input-container input {
@@ -45,6 +46,7 @@
   display: block;
   margin-bottom: 3px;
   box-sizing: border-box;
+  font-size: 16px;
 }
 
 .login-btn {
