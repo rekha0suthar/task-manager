@@ -1,0 +1,123 @@
+/*
+ Color codes
+ bg: #081621
+ bg-light: #f1f1f1
+ in-bg: #e8f0fe
+ go-bg; #797389
+ white-light: rgba(255,255,255,.5)
+*/
+
+.login-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 80vh;
+  margin-top: 100px !important;
+  margin: 0px 10px;
+}
+
+.login-containerv2 {
+  width: 500px;
+  background-color: white;
+  box-shadow: 0px 0px 6px #ccc;
+  padding: 20px;
+  border-radius: 0.5rem;
+}
+.login-containerv2 h3 {
+  font-weight: 600;
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.input-container label {
+  display: block;
+  margin-top: 20px;
+  font-weight: 600;
+}
+
+.input-container input {
+  width: 100%;
+  border: 1px solid #ccc;
+  color: black;
+  padding: 15px;
+  border-radius: 0.5rem;
+  display: block;
+  margin-bottom: 3px;
+  box-sizing: border-box;
+}
+
+.login-btn {
+  border: none;
+  width: 100%;
+  padding: 15px;
+  border-radius: 0.5rem;
+  margin-top: 7px;
+  margin-bottom: 7px;
+  background-color: red;
+  color: white;
+  transition: all 0.4s;
+  margin-top: 20px;
+}
+
+.login-btn:hover {
+  transition: all 0.4s;
+  background-color: white;
+  border: 1px solid red;
+  color: black;
+}
+
+.or {
+  display: block;
+  text-align: center;
+}
+
+.google-btn {
+  padding: 15px;
+  width: 100%;
+  border: 1px solid rgb(245, 41, 75);
+  background-color: transparent;
+  border-radius: 0.5rem;
+  color: rgb(245, 41, 75);
+  transition: all 0.4s;
+}
+
+.google-btn:hover {
+  transition: all 0.4s;
+  background-color: rgb(245, 41, 75);
+  border: none;
+  color: white;
+}
+
+.signup-btn {
+  color: black;
+}
+
+.signup-btn:hover {
+  color: black;
+  text-decoration: underline;
+}
+
+.notreg {
+  display: inline-block;
+  margin-top: 15px;
+}
+
+.forgetme-container {
+  display: flex;
+  margin-top: 15px;
+  justify-content: space-between;
+}
+
+.forgetme-container a {
+  color: black;
+}
+
+.footer-container {
+  display: flex;
+  margin-top: 10px;
+  justify-content: space-between;
+}
+
+.footer-container a {
+  color: black;
+}
