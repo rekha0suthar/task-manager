@@ -53,3 +53,13 @@ input {
   padding: 10px;
   outline: none;
 }
+
+.title-wrapper {
+  max-width: 400px;
+}
+
+@media screen and (max-width: 576px) {
+  .title-wrapper {
+    max-width: 200px;
+  }
+}

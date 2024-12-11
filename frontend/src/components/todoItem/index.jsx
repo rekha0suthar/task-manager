@@ -55,7 +55,7 @@ const TodoItem = ({ id, title, completed, dueDate, setTodos }) => {
 
   return (
     <li className="todo-item">
-      <div style={{ width: '200px' }}>
+      <div className="title-wrapper">
         <input
           type="checkbox"
           checked={!!completed}

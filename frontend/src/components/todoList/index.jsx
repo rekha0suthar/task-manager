@@ -3,9 +3,11 @@ import NewTodo from '../newTodo';
 import Todo from '../todo';
 import './todolist.css';
 import { getTasks } from '../../api';
+import { useNavigate } from 'react-router-dom';
 
 const TodoList = () => {
   const [todos, setTodos] = useState([]);
+  const navigate = useNavigate();
 
   const filteredAndSortedTodos = (completed) =>
     todos
@@ -21,6 +23,7 @@ const TodoList = () => {
         setTodos(data);
       } catch (err) {
         console.log(err);
+        navigate('/');
       }
     };
     fetchTodos();

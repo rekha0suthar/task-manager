@@ -4,7 +4,7 @@ import { addTask } from '../../api';
 
 const NewTodo = ({ todos, setTodos }) => {
   const [title, setTitle] = useState('');
-  const [dueDate, setDueDate] = useState(null);
+  const [dueDate, setDueDate] = useState();
 
   const addTodo = async (newTodo) => {
     const { data } = await addTask(newTodo);
