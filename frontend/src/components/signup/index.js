@@ -99,23 +99,22 @@ const Signup = () => {
           />
         </div>
 
-        <div>
-          <div>
-            Already Signed Up? <Link to="/">Login</Link>
-          </div>
-          {/* <div>
-            <Link to="/account/forgotpassword">Forgot Password?</Link>
-          </div> */}
-        </div>
-
         <button onClick={handleOnSubmit} className="login-btn">
           {loading ? 'Registering, please wait' : 'REGISTER'}
         </button>
+        {/* Disabled Google Signup
         <span className="or">or</span>
         <button onClick={() => login()} className="google-btn">
           <FaGoogle />{' '}
           {loading ? 'Signing in, please wait' : 'Sign up with google'}
-        </button>
+        </button> 
+        */}
+        <span className="notreg">
+          Already Signed Up?{' '}
+          <Link className="signup-btn" to="/">
+            Login
+          </Link>
+        </span>
       </div>
     </div>
   );

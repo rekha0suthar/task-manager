@@ -61,11 +61,13 @@ const Login = () => {
         <button onClick={handleSubmit} className="login-btn">
           {loading ? 'Signing in please wait' : 'SIGNIN'}
         </button>
+        {/* Disable Google Login
         <span className="or">or</span>
         <button onClick={() => login()} className="google-btn">
           <FaGoogle />{' '}
           {loading ? 'Signing in please wait' : 'Sign in with google'}
-        </button>
+        </button> 
+        */}
 
         <span className="notreg">
           Not registered yet?{' '}
