@@ -1,12 +1,12 @@
 import React from 'react';
-import Nav from './components/nav';
 import Router from './router/Router';
 import './App.css';
+import { Toaster } from 'react-hot-toast';
 function App() {
   return (
     <div className="App">
-      <Nav />
       <Router />
+      <Toaster />
     </div>
   );
 }
