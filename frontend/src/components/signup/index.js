@@ -48,6 +48,10 @@ const Signup = () => {
   const login = useGoogleLogin({ onSuccess: handleGoogleLoginSuccess });
   return (
     <div className="login-container">
+      <div className="auth-logo">
+        <h1>Taskify</h1>
+        <p>Organize your tasks, simplify your life</p>
+      </div>
       <div className="login-containerv2">
         <h2>Create your account</h2>
 

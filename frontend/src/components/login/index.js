@@ -28,6 +28,12 @@ const Login = () => {
 
   return (
     <div className="login-container">
+      <div className="auth-logo">
+        <div className="auth-logo-content">
+          <h1>Taskify</h1>
+          <p>Organize your tasks, simplify your life</p>
+        </div>
+      </div>
       <div className="login-containerv2">
         <h2>Welcome back</h2>
 
