@@ -14,15 +14,16 @@
 .open {
   display: none;
   position: fixed;
-  top: 2rem;
+  top: 2.5rem;
   right: -280px;
   height: 100vh;
-  width: 280px;
+  width: 200px;
   z-index: 50;
   transition: right 0.3s ease-in-out;
   margin-top: 3.5rem;
   background: white;
   border-left: 1px solid #e2e8f0;
+  box-sizing: border-box;
 }
 
 .brand {

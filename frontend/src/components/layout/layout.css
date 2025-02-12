@@ -1,10 +1,217 @@
-/* Move the shared styles from todolist.css */
+/* Reset default margins and padding */
+body {
+  margin: 0;
+  padding: 0;
+}
+
+.App {
+  min-height: 100vh;
+}
+
+/* Update dashboard container */
 .dashboard-container {
   display: grid;
   grid-template-columns: 280px 1fr;
   min-height: 100vh;
-  background-color: #f8fafc;
+  background-color: var(--bg-primary);
+  margin: 0;
+  padding: 0;
+  overflow-x: hidden; /* Prevent horizontal scrolling */
+}
+
+/* Update main content area */
+.dashboard-main {
+  padding: 1rem 3rem;
+  max-width: 1200px;
+  margin: 0 auto;
+  width: 100%;
+  box-sizing: border-box;
+  min-height: 100vh;
+}
+
+@media (max-width: 768px) {
+  .dashboard-container {
+    grid-template-columns: 1fr;
+  }
+
+  .dashboard-main {
+    padding: 5rem 1rem 1rem;
+    margin: 0;
+  }
+
+  .tasks-container {
+    margin: 0;
+    border-radius: 0.5rem;
+  }
 }
 
 /* Copy all the shared styles from todolist.css */
 /* Including .dashboard-sidebar, .brand, .nav-menu, .mobile-header, etc. */
+
+.nav-menu {
+  margin-top: 2rem;
+  display: flex;
+  flex-direction: column;
+  height: calc(100vh - 200px);
+  position: relative;
+}
+
+.nav-items {
+  flex: 1;
+}
+
+.logout-btn {
+  margin-top: auto;
+  border-top: 1px solid var(--border-color);
+  padding-top: 1rem;
+  color: #ef4444 !important;
+}
+
+.logout-btn:hover {
+  background-color: var(--hover-bg) !important;
+  color: #dc2626 !important;
+}
+
+/* Add dark mode variables */
+:root {
+  --bg-primary: #f8fafc;
+  --bg-secondary: #ffffff;
+  --text-primary: #0f172a;
+  --text-secondary: #64748b;
+  --border-color: #e2e8f0;
+  --hover-bg: #f1f5f9;
+  --active-bg: #eff6ff;
+  --active-color: #3b82f6;
+}
+
+.dark {
+  --bg-primary: #0f172a;
+  --bg-secondary: #1e293b;
+  --text-primary: #f8fafc;
+  --text-secondary: #94a3b8;
+  --border-color: #334155;
+  --hover-bg: #1e293b;
+  --active-bg: #1e40af;
+  --active-color: #60a5fa;
+}
+
+/* Update existing styles to use variables */
+.dashboard-container {
+  background-color: var(--bg-primary);
+}
+
+.dashboard-sidebar {
+  background-color: var(--bg-secondary);
+  border-right: 1px solid var(--border-color);
+}
+
+.nav-item {
+  color: var(--text-secondary);
+}
+
+.nav-item:hover {
+  background-color: var(--hover-bg);
+  color: var(--text-primary);
+}
+
+.nav-item.active {
+  background-color: var(--active-bg);
+  color: var(--active-color);
+}
+
+/* Add theme toggle styles */
+.theme-toggle {
+  padding: 0.5rem;
+  border: none;
+  background: none;
+  color: var(--text-secondary);
+  cursor: pointer;
+  border-radius: 0.5rem;
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  transition: all 0.2s;
+}
+
+.theme-toggle:hover {
+  background-color: var(--hover-bg);
+  color: var(--text-primary);
+}
+
+.mobile-actions {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.nav-bottom {
+  border-top: 1px solid var(--border-color);
+  padding-top: 1rem;
+  margin-top: auto;
+}
+
+/* Update other components for dark mode */
+.tasks-container {
+  background-color: var(--bg-secondary);
+  border: 1px solid var(--border-color);
+}
+
+.mobile-header {
+  background-color: var(--bg-secondary);
+  border-bottom: 1px solid var(--border-color);
+}
+
+/* Add more dark mode styles for other components as needed */
+
+/* Update header content styles */
+.header-content h2 {
+  font-size: 1.875rem;
+  font-weight: 700;
+  color: var(--text-primary);
+  margin-bottom: 0.5rem;
+}
+
+.subtitle {
+  color: var(--text-secondary);
+  font-size: 0.975rem;
+}
+
+/* Update brand text styles */
+.brand h1,
+.mobile-brand h1 {
+  font-size: 1.75rem;
+  font-weight: 700;
+  background: linear-gradient(45deg, #3b82f6, #8b5cf6);
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+/* Update task tabs styles */
+.task-tabs {
+  background-color: var(--bg-secondary);
+  border: 1px solid var(--border-color);
+}
+
+.tab-btn {
+  color: var(--text-secondary);
+}
+
+.tab-btn:hover {
+  color: var(--text-primary);
+}
+
+.tab-btn.active {
+  background-color: var(--active-bg);
+  color: var(--active-color);
+}
+
+.task-count {
+  background-color: var(--hover-bg);
+  color: var(--text-secondary);
+}
+
+.active .task-count {
+  background-color: var(--active-bg);
+  color: var(--active-color);
+}

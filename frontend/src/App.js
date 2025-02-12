@@ -1,13 +1,17 @@
 import React from 'react';
 import Router from './router/Router';
-import './App.css';
+import { ThemeProvider } from './context/ThemeContext';
 import { Toaster } from 'react-hot-toast';
+import './App.css';
+
 function App() {
   return (
-    <div className="App">
-      <Router />
-      <Toaster />
-    </div>
+    <ThemeProvider>
+      <div className="App">
+        <Router />
+        <Toaster />
+      </div>
+    </ThemeProvider>
   );
 }
 
