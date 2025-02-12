@@ -1,65 +1,227 @@
 .todo-item {
-  list-style: none;
+  background: #ffffff;
+  border-radius: 0.75rem;
+  margin-bottom: 0.75rem;
+  transition: all 0.2s ease;
+  border: 1px solid #e2e8f0;
+  padding: 1rem;
+  border-bottom: 1px solid #e2e8f0;
+}
+
+.todo-item:hover {
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+  transform: translateY(-1px);
+}
+
+.todo-item.completed {
+  background-color: #f8fafc;
+}
+
+.todo-item-content {
   display: flex;
-  justify-content: space-between;
-  background-color: white;
-  box-shadow: 0px 0px 6px #ccc;
-  margin-bottom: 10px;
   align-items: center;
-  padding-bottom: 20px;
+  justify-content: space-between;
+  gap: 1rem;
+}
+
+.todo-item-left {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  flex: 1;
+  min-width: 0;
+}
+
+.checkbox-wrapper {
+  flex-shrink: 0;
+}
+
+.checkbox-wrapper input[type='checkbox'] {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 20px;
+  height: 20px;
+  border: 2px solid #cbd5e1;
+  border-radius: 6px;
+  cursor: pointer;
   position: relative;
+  transition: all 0.2s ease;
+  background-color: white;
 }
 
-.todo-item .due-date {
-  padding: 10px;
-  font-size: 12px;
-  color: #524e4e;
+.checkbox-wrapper input[type='checkbox']:checked {
+  background-color: #3b82f6;
+  border-color: #3b82f6;
+}
+
+.checkbox-wrapper input[type='checkbox']:checked::after {
+  content: '✓';
   position: absolute;
-  left: 20px;
-  bottom: -10%;
+  color: white;
+  font-size: 14px;
+  left: 50%;
+  top: 45%;
+  transform: translate(-50%, -50%);
 }
 
-.edit-btn {
-  color: blue;
-  margin-right: 10px;
-  background-color: transparent;
+.checkbox-wrapper input[type='checkbox']:hover {
+  border-color: #3b82f6;
 }
 
-.del-btn {
-  color: red;
-  background-color: transparent;
+.checkbox-wrapper input[type='checkbox']:focus {
+  outline: none;
+  box-shadow: 0 0 0 2px rgba(59, 130, 246, 0.2);
 }
 
 .task-title {
-  font-size: 18px;
-  padding: 5px;
-  text-transform: capitalize;
-  word-break: break-all;
+  font-size: 1rem;
+  color: #0f172a;
+  word-break: break-word;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  transition: all 0.2s;
+}
+
+.completed .task-title {
+  color: #94a3b8;
+  text-decoration: line-through;
 }
 
 .title-edit {
-  margin-bottom: 20px;
-  margin-left: 5px;
-  width: 150px;
-}
-
-button {
+  background: transparent;
   border: none;
-}
-
-input {
-  border: 1px solid #ccc;
-  border-radius: 10px;
-  padding: 10px;
+  border-bottom: 2px solid #3b82f6;
+  font-size: 0.95rem;
+  padding: 0.25rem 0;
+  width: 100%;
+  color: #1e293b;
   outline: none;
 }
 
-.title-wrapper {
-  max-width: 400px;
+.todo-item-right {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  flex-shrink: 0;
 }
 
-@media screen and (max-width: 576px) {
-  .title-wrapper {
-    max-width: 200px;
+.due-date {
+  font-size: 0.875rem;
+  padding: 0.45rem 0.75rem;
+  border-radius: 10px;
+  background-color: #f1f5f9;
+  color: #64748b;
+  white-space: nowrap;
+}
+
+.due-date.overdue {
+  color: #ef4444;
+  background-color: #fee2e2;
+}
+
+.todo-actions {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.action-btn {
+  padding: 0.5rem;
+  border-radius: 0.375rem;
+  border: none;
+  background: none;
+  cursor: pointer;
+  color: #64748b;
+  transition: all 0.2s;
+}
+
+.action-btn:hover {
+  background-color: #f1f5f9;
+}
+
+.edit-btn:hover {
+  color: #3b82f6;
+}
+
+.delete-btn:hover {
+  color: #ef4444;
+}
+
+.save-btn:hover {
+  color: #22c55e;
+}
+
+.cancel-btn:hover {
+  color: #ef4444;
+}
+
+/* Animation for new items */
+@keyframes slideIn {
+  from {
+    transform: translateX(100%);
+    opacity: 0;
+  }
+  to {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+
+@keyframes slideOut {
+  from {
+    transform: translateX(0);
+    opacity: 1;
+  }
+  to {
+    transform: translateX(100%);
+    opacity: 0;
+  }
+}
+
+.toast-animation {
+  animation: slideIn 0.3s ease forwards;
+}
+
+.toast-animation[data-state='leaving'] {
+  animation: slideOut 0.3s ease forwards;
+}
+
+/* Optional: Add a hover effect to the toast */
+.toast-animation:hover {
+  transform: translateY(-3px);
+  transition: transform 0.2s ease;
+}
+
+.todo-item {
+  animation: slideIn 0.3s ease-out;
+}
+
+/* Responsive styles */
+@media (max-width: 640px) {
+  .todo-item {
+    padding: 0.75rem;
+  }
+
+  .todo-item-content {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0rem;
+  }
+
+  .todo-item-right {
+    width: 100%;
+    justify-content: space-between;
+  }
+
+  .task-title {
+    font-size: 0.938rem;
+  }
+
+  .due-date {
+    font-size: 0.813rem;
+    padding: 0.288rem 0.5rem;
+  }
+
+  .action-btn {
+    padding: 0.375rem;
   }
 }

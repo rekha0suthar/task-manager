@@ -1,0 +1,10 @@
+/* Move the shared styles from todolist.css */
+.dashboard-container {
+  display: grid;
+  grid-template-columns: 280px 1fr;
+  min-height: 100vh;
+  background-color: #f8fafc;
+}
+
+/* Copy all the shared styles from todolist.css */
+/* Including .dashboard-sidebar, .brand, .nav-menu, .mobile-header, etc. */

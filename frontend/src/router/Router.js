@@ -7,6 +7,7 @@ import { ProtectedRoute } from './ProtectedRoute';
 import UserProfile from '../components/profile';
 import ForgotPassword from '../components/forgotPassword';
 import ResetPassword from '../components/ResetPassword';
+import DashboardLayout from '../components/layout/DashboardLayout';
 
 const Router = () => {
   return (
@@ -16,8 +17,10 @@ const Router = () => {
       <Route path="/forgot-password" element={<ForgotPassword />} />
       <Route path="/reset-password" element={<ResetPassword />} />
       <Route element={<ProtectedRoute />}>
-        <Route path="/dashboard" element={<TodoList />} />
-        <Route path="/profile" element={<UserProfile />} />
+        <Route element={<DashboardLayout />}>
+          <Route path="/dashboard" element={<TodoList />} />
+          <Route path="/profile" element={<UserProfile />} />
+        </Route>
       </Route>
     </Routes>
   );

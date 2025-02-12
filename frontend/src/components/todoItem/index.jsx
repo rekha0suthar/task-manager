@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { MdDelete, MdEdit } from 'react-icons/md';
 import { FaCheck } from 'react-icons/fa6';
 import { IoClose } from 'react-icons/io5';
+import toast from 'react-hot-toast';
 import './todoitem.css';
 import { deleteTask, getTasks, updateTask } from '../../api';
 
@@ -10,35 +11,99 @@ const TodoItem = ({ id, title, completed, dueDate, setTodos }) => {
   const [newTitle, setNewTitle] = useState(title); // Store new title
 
   const getDueDateText = () => {
-    if (dueDate === 'No due date') return 'No due date';
+    // If no due date or empty string, return "No due date"
+    if (!dueDate || dueDate === '') {
+      return 'No due date';
+    }
 
     const today = new Date();
+    today.setHours(0, 0, 0, 0); // Reset time part for accurate date comparison
+
     const taskDueDate = new Date(dueDate);
+    taskDueDate.setHours(0, 0, 0, 0);
 
     if (taskDueDate < today) {
-      return 'Due date passed';
-    } else if (taskDueDate.toDateString() === today.toDateString()) {
+      return 'Due passed';
+    } else if (taskDueDate.getTime() === today.getTime()) {
       return 'Due today';
     } else {
-      return dueDate;
+      // Format the date as "MMM DD" (e.g., "Jan 15")
+      return taskDueDate.toLocaleDateString('en-US', {
+        month: 'short',
+        day: 'numeric',
+      });
     }
   };
 
-  // Fetch updated list of todos after deletion
+  // Define fetchTodos function
   const fetchTodos = async () => {
-    const { data } = await getTasks();
-    setTodos(data);
+    try {
+      const { data } = await getTasks();
+      setTodos(data);
+    } catch (error) {
+      console.error('Error fetching todos:', error);
+    }
   };
 
   const handleDelete = async () => {
-    await deleteTask(id);
-    fetchTodos();
+    try {
+      await deleteTask(id);
+      await fetchTodos();
+
+      toast.success('Task deleted successfully', {
+        duration: 2000,
+        position: 'top-right',
+        style: {
+          background: '#6B7280',
+          color: '#fff',
+          padding: '16px',
+          borderRadius: '10px',
+        },
+        className: 'toast-animation',
+      });
+    } catch (error) {
+      toast.error('Failed to delete task', {
+        style: {
+          background: '#EF4444',
+          color: '#fff',
+          padding: '16px',
+          borderRadius: '10px',
+        },
+        className: 'toast-animation',
+      });
+      console.error('Error deleting todo:', error);
+    }
   };
 
   const handleSave = async () => {
-    await updateTask(id, { title: newTitle, completed }); // Save changes
-    fetchTodos();
-    setIsEditing(false); // Exit edit mode
+    try {
+      await updateTask(id, { title: newTitle, completed });
+      await fetchTodos();
+      setIsEditing(false);
+
+      toast.success('Task updated successfully', {
+        duration: 2000,
+        position: 'top-right',
+        style: {
+          background: '#3B82F6',
+          color: '#fff',
+          padding: '16px',
+          borderRadius: '10px',
+        },
+        className: 'toast-animation',
+      });
+    } catch (error) {
+      toast.error('Failed to update task', {
+        style: {
+          background: '#EF4444',
+          color: '#fff',
+          padding: '16px',
+          borderRadius: '10px',
+        },
+        className: 'toast-animation',
+      });
+      console.error('Error updating todo:', error);
+    }
   };
 
   const handleCancel = () => {
@@ -47,91 +112,141 @@ const TodoItem = ({ id, title, completed, dueDate, setTodos }) => {
   };
 
   const toggleTodo = async () => {
-    await updateTask(id, { completed: !completed });
-    fetchTodos();
+    try {
+      await updateTask(id, { completed: !completed });
+      await fetchTodos();
+
+      const toastOptions = {
+        duration: 2000,
+        position: 'top-right',
+        style: {
+          padding: '16px',
+          borderRadius: '10px',
+          transition: 'all 0.3s ease-in-out',
+        },
+        // Add custom animation
+        className: 'toast-animation',
+      };
+
+      if (!completed) {
+        toast.success('Task marked as completed! 🎉', {
+          ...toastOptions,
+          style: {
+            ...toastOptions.style,
+            background: '#10B981',
+            color: '#fff',
+          },
+          iconTheme: {
+            primary: '#fff',
+            secondary: '#10B981',
+          },
+        });
+      } else {
+        toast('Task marked as incomplete', {
+          ...toastOptions,
+          style: {
+            ...toastOptions.style,
+            background: '#6B7280',
+            color: '#fff',
+          },
+        });
+      }
+    } catch (error) {
+      toast.error('Failed to update task status', {
+        style: {
+          background: '#EF4444',
+          color: '#fff',
+          padding: '16px',
+          borderRadius: '10px',
+          transition: 'all 0.3s ease-in-out',
+        },
+        className: 'toast-animation',
+      });
+      console.error('Error toggling todo:', error);
+    }
   };
 
   const dueDateText = getDueDateText();
 
   return (
-    <li className="todo-item">
-      <div className="title-wrapper">
-        <input
-          type="checkbox"
-          checked={!!completed}
-          onChange={() => toggleTodo(id, !completed, fetchTodos)}
-          aria-label="Mark task as complete"
-        />
+    <li className={`todo-item ${completed ? 'completed' : ''}`}>
+      <div className="todo-item-content">
+        <div className="todo-item-left">
+          <div className="checkbox-wrapper">
+            <input type="checkbox" checked={completed} onChange={toggleTodo} />
+          </div>
 
-        {isEditing ? (
-          <input
-            type="text"
-            value={newTitle}
-            onChange={(e) => setNewTitle(e.target.value)}
-            onKeyDown={(e) => {
-              if (e.key === 'Enter') handleSave();
-              if (e.key === 'Escape') handleCancel();
-            }}
-            className="title-edit"
-            aria-label="Edit task title"
-          />
-        ) : (
+          {isEditing ? (
+            <input
+              type="text"
+              value={newTitle}
+              onChange={(e) => setNewTitle(e.target.value)}
+              onKeyDown={(e) => {
+                if (e.key === 'Enter') handleSave();
+                if (e.key === 'Escape') handleCancel();
+              }}
+              className="title-edit"
+              aria-label="Edit task title"
+              autoFocus
+            />
+          ) : (
+            <span className="task-title">{title}</span>
+          )}
+        </div>
+
+        <div className="todo-item-right">
           <span
-            style={{
-              textDecoration: completed ? 'line-through' : 'none',
-              color: completed ? '#ccc' : '#000',
-            }}
-            className="task-title"
+            className={`due-date ${
+              getDueDateText() === 'Due passed'
+                ? 'overdue'
+                : getDueDateText() === 'Due today'
+                ? 'due-today'
+                : getDueDateText() === 'No due date'
+                ? 'no-date'
+                : ''
+            }`}
           >
-            {title}
+            {getDueDateText()}
           </span>
-        )}
-      </div>
-      <p
-        className="due-date"
-        style={{
-          color: dueDateText === 'Due date passed' ? 'red' : undefined,
-        }}
-      >
-        {dueDateText}
-      </p>
 
-      <div>
-        {isEditing ? (
-          <>
-            <button
-              className="edit-btn"
-              onClick={handleSave}
-              aria-label="Save changes"
-            >
-              <FaCheck />
-            </button>
-            <button
-              className="del-btn"
-              onClick={handleCancel}
-              aria-label="Cancel editing"
-            >
-              <IoClose />
-            </button>
-          </>
-        ) : (
-          <>
-            <button
-              className="edit-btn"
-              onClick={() => setIsEditing(true)}
-              aria-label="Edit task"
-            >
-              <MdEdit />
-            </button>
-            <button
-              className="del-btn"
-              onClick={() => handleDelete()}
-              aria-label="Delete task"
-            >
-              <MdDelete />
-            </button>
-          </>
-        )}
+          <div className="todo-actions">
+            {isEditing ? (
+              <>
+                <button
+                  className="action-btn save-btn"
+                  onClick={handleSave}
+                  aria-label="Save changes"
+                >
+                  <FaCheck />
+                </button>
+                <button
+                  className="action-btn cancel-btn"
+                  onClick={handleCancel}
+                  aria-label="Cancel editing"
+                >
+                  <IoClose />
+                </button>
+              </>
+            ) : (
+              <>
+                <button
+                  className="action-btn edit-btn"
+                  onClick={() => setIsEditing(true)}
+                  aria-label="Edit task"
+                >
+                  <MdEdit />
+                </button>
+                <button
+                  className="action-btn delete-btn"
+                  onClick={handleDelete}
+                  aria-label="Delete task"
+                >
+                  <MdDelete />
+                </button>
+              </>
+            )}
+          </div>
+        </div>
       </div>
     </li>
   );

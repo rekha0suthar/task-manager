@@ -1,28 +1,37 @@
 import React from 'react';
 import TodoItem from '../todoItem';
+import { FiInbox } from 'react-icons/fi';
+import './todo.css';
 
 const Todo = ({ filteredAndSortedTodos, setTodos, isCompleted }) => {
+  const todos = filteredAndSortedTodos(isCompleted);
+
   return (
-    <ul>
-      {filteredAndSortedTodos(isCompleted).length > 0 ? (
-        filteredAndSortedTodos(isCompleted).map(
-          ({ _id, title, completed, dueDate }) => (
+    <div className="todo-list-wrapper">
+      {todos.length > 0 ? (
+        <ul className="todo-list">
+          {todos.map(({ _id, title, completed, dueDate }) => (
             <TodoItem
               key={_id}
               id={_id}
               title={title}
               completed={completed}
-              dueDate={
-                dueDate ? new Date(dueDate).toLocaleDateString() : 'No due date'
-              } // Format dueDate
+              dueDate={dueDate}
               setTodos={setTodos}
             />
-          )
-        )
+          ))}
+        </ul>
       ) : (
-        <p className="dummy-text">No Pending Tasks</p>
+        <div className="empty-state">
+          <FiInbox className="empty-icon" />
+          <p className="empty-text">
+            {isCompleted
+              ? "You haven't completed any tasks yet"
+              : 'No tasks to show. Add a new task to get started!'}
+          </p>
+        </div>
       )}
-    </ul>
+    </div>
   );
 };
 

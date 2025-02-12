@@ -1,38 +1,382 @@
-.todo-container {
-  max-width: 100%;
-  margin-top: 100px;
+.dashboard-container {
+  display: grid;
+  grid-template-columns: 280px 1fr;
+  min-height: 100vh;
+  background-color: #f8fafc;
 }
 
-.todo-container h2 {
-  font-size: 24px;
-  font-weight: bold;
+.dashboard-sidebar {
+  background-color: #ffffff;
+  border-right: 1px solid #e2e8f0;
+  padding: 2rem 1rem;
 }
 
-.todo-container div {
-  padding: 10px;
-  list-style: none;
+.open {
+  display: none;
+  position: fixed;
+  top: 2rem;
+  right: -280px;
+  height: 100vh;
+  width: 280px;
+  z-index: 50;
+  transition: right 0.3s ease-in-out;
+  margin-top: 3.5rem;
+  background: white;
+  border-left: 1px solid #e2e8f0;
 }
 
-.todo-list-wrapper {
+.brand {
+  padding: 0 1rem 2rem;
+  border-bottom: 1px solid #e2e8f0;
+}
+
+.brand h1 {
+  font-size: 1.75rem;
+  font-weight: 700;
+  background: linear-gradient(45deg, #3b82f6, #8b5cf6);
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.nav-menu {
+  margin-top: 2rem;
   display: flex;
+  flex-direction: column;
+  height: calc(100vh - 200px);
+  position: relative;
+}
+
+.nav-item {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  padding: 0.875rem 1rem;
+  margin-bottom: 0.5rem;
+  border-radius: 0.5rem;
+  color: #64748b;
+  border: none;
+  background: none;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.nav-item:hover {
+  background-color: #f1f5f9;
+  color: #0f172a;
+}
+
+.nav-item.active {
+  background-color: #eff6ff;
+  color: #3b82f6;
+  font-weight: 600;
+}
+
+.nav-icon {
+  margin-right: 0.75rem;
+  font-size: 1.25rem;
+}
+
+.task-badge {
+  margin-left: auto;
+  background-color: #e2e8f0;
+  padding: 0.25rem 0.625rem;
+  border-radius: 999px;
+  font-size: 0.75rem;
+  font-weight: 500;
+}
+
+.dashboard-main {
+  padding: 1rem 3rem;
+  max-width: 1200px;
+  margin: 0 auto;
   width: 100%;
 }
 
-.todo-list-wrapper .list {
-  flex: 1;
+.dashboard-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1rem;
 }
 
-ul {
-  padding-left: 0px;
+.header-content h2 {
+  font-size: 1.875rem;
+  font-weight: 700;
+  color: #0f172a;
+  margin-bottom: 0.5rem;
 }
 
-.dummy-text {
-  font-size: 20px;
-  margin: 30px 50px;
+.subtitle {
+  color: #64748b;
+  font-size: 0.975rem;
 }
 
-@media screen and (max-width: 768px) {
-  .todo-list-wrapper {
+.tasks-container {
+  background-color: #ffffff;
+  border-radius: 1rem;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+  padding: 1.5rem;
+}
+
+.new-task-wrapper {
+  min-width: 300px;
+}
+
+.mobile-menu-btn {
+  display: none;
+  position: fixed;
+  top: 0rem;
+  left: 15rem;
+  z-index: 100;
+  padding: 0.5rem;
+  font-size: 1.25rem;
+  color: #0f172a;
+  background: transparent;
+  border: 1px solid #e2e8f0;
+  border-radius: 9999px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.mobile-menu-btn:hover {
+  background-color: #f8fafc;
+  transform: scale(1.05);
+}
+
+.mobile-header {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  padding: 0.75rem 1.5rem;
+  background: white;
+  border-bottom: 1px solid #e2e8f0;
+  z-index: 49;
+}
+
+.mobile-header-content {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.mobile-brand h1 {
+  font-size: 1.5rem;
+  font-weight: 700;
+  background: linear-gradient(45deg, #3b82f6, #8b5cf6);
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+/* Responsive Design */
+@media (min-width: 768px) {
+  .dashboard-main {
+    box-sizing: border-box;
+  }
+}
+
+@media (max-width: 1024px) {
+  .dashboard-container {
+    grid-template-columns: 220px 1fr;
+  }
+}
+
+@media (max-width: 768px) {
+  .dashboard-sidebar {
+    display: none;
+  }
+  .mobile-header {
     display: block;
+  }
+
+  .brand {
+    display: none;
+  }
+
+  .mobile-menu-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: static;
+    border: none;
+    padding: 0.5rem;
+  }
+
+  .dashboard-container {
+    grid-template-columns: 1fr;
+  }
+
+  .dashboard-sidebar.open {
+    display: block;
+    right: 0;
+  }
+
+  .dashboard-main {
+    padding: 5rem 3rem;
+  }
+
+  .dashboard-header {
+    flex-direction: column;
+    gap: 1.5rem;
+  }
+
+  .new-task-wrapper {
+    width: 100%;
+  }
+
+  .tasks-container {
+    padding: 1rem;
+    margin: 0 -1rem;
+    border-radius: 0;
+  }
+
+  .header-content {
+    text-align: center;
+  }
+
+  .header-content h2 {
+    font-size: 1.5rem;
+  }
+
+  .subtitle {
+    font-size: 0.875rem;
+  }
+
+  .nav-menu {
+    height: calc(100vh - 200px); /* Adjust for mobile */
+  }
+
+  .profile-link {
+    position: relative;
+    bottom: auto;
+    margin-top: 1rem;
+  }
+}
+
+@media (min-width: 769px) and (max-width: 1024px) {
+  .dashboard-container {
+    grid-template-columns: 220px 1fr;
+  }
+
+  .dashboard-main {
+    padding: 2rem;
+  }
+
+  .new-task-wrapper {
+    min-width: 250px;
+  }
+}
+
+.profile-link {
+  position: absolute;
+  bottom: 1rem;
+  left: 0;
+  right: 0;
+  border-top: 1px solid #e2e8f0;
+  padding-top: 1rem;
+  margin-top: 0;
+}
+
+.task-tabs {
+  display: flex;
+  gap: 1rem;
+  margin-bottom: 2rem;
+  padding: 0.5rem;
+  background-color: #f1f5f9;
+  border-radius: 0.75rem;
+}
+
+.tab-btn {
+  flex: 1;
+  min-width: 140px;
+  justify-content: center;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.75rem 1.25rem;
+  border: none;
+  background: none;
+  color: #64748b;
+  font-size: 0.938rem;
+  border-radius: 0.5rem;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.tab-btn:hover {
+  color: #0f172a;
+}
+
+.tab-btn.active {
+  background-color: white;
+  color: #3b82f6;
+  font-weight: 500;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+.tab-icon {
+  font-size: 1.25rem;
+}
+
+.task-count {
+  background-color: #e2e8f0;
+  padding: 0.25rem 0.625rem;
+  border-radius: 999px;
+  font-size: 0.75rem;
+  margin-left: 0.5rem;
+}
+
+.active .task-count {
+  background-color: #eff6ff;
+}
+
+@media (max-width: 640px) {
+  .task-tabs {
+    margin: -0.5rem -0.5rem 1.5rem;
+    border-radius: 0;
+  }
+
+  .tab-btn {
+    padding: 0.625rem 1rem;
+    font-size: 0.875rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .task-tabs {
+    gap: 0.5rem;
+  }
+
+  .tab-btn {
+    width: 100%;
+    justify-content: space-between;
+  }
+
+  .task-count {
+    margin-left: auto;
+  }
+
+  .dashboard-header {
+    margin-bottom: 1.5rem;
+    margin-top: 1.5rem;
+  }
+
+  .header-content h2 {
+    font-size: 1.25rem;
+  }
+
+  .subtitle {
+    font-size: 0.875rem;
+  }
+}
+
+@media (min-width: 1025px) {
+  .tasks-container {
+    margin-top: 1rem;
   }
 }
