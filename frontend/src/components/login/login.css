@@ -338,3 +338,35 @@
     align-items: flex-start;
   }
 }
+
+.demo-btn {
+  width: 100%;
+  padding: 0.875rem;
+  background: #f8fafc;
+  color: var(--text-primary);
+  border: 1px dashed var(--primary-color);
+  border-radius: 0.5rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  margin-top: 1rem;
+}
+
+.demo-btn:hover {
+  background: var(--primary-color);
+  color: white;
+  border-style: solid;
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(59, 130, 246, 0.15);
+}
+
+/* Dark mode support */
+.dark .demo-btn {
+  background: #1e293b;
+  color: var(--text-primary);
+}
+
+.dark .demo-btn:hover {
+  background: var(--primary-color);
+  color: white;
+}
