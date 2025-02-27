@@ -85,11 +85,11 @@ const Login = () => {
         {/* Disable Google Login
         <span className="or">or</span>
         <button onClick={() => login()} className="google-btn">
-          <FaGoogle />{' '}
-          {loading ? 'Signing in please wait' : 'Sign in with google'}
-        </button> 
-        */}
-
+          <FaGoogle /> Sign in with Google
+        </button> */}
+        <button onClick={handleDemoClick} className="demo-btn">
+          Try Demo
+        </button>
         <span className="notreg">
           Not registered yet?{' '}
           <Link className="signup-btn" to="/signup">
