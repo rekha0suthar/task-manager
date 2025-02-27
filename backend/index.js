@@ -18,7 +18,7 @@ app.use('/api/tasks', taskRoutes);
 
 mongoose
   .connect(process.env.MONGO_URI)
-  .then(() => `MongoDB connect`)
+  .then(() => console.log(`MongoDB connect`))
   .catch((err) => console.log(err));
 
 app.listen(PORT, () => `Server is running on ${PORT}`);

@@ -4,20 +4,30 @@ import './login.css';
 import { useGoogleLogin } from '@react-oauth/google';
 import { signinGoogle, signin } from '../../utils';
 import { FaGoogle } from 'react-icons/fa';
+import toast from 'react-hot-toast';
+import { useDemo } from '../../context/DemoContext';
 
 const Login = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [loading, setLoading] = useState(false);
 
+  const { startDemo } = useDemo();
   const navigate = useNavigate();
 
-  function handleGoogleLoginSuccess(tokenResponse) {
-    const accessToken = tokenResponse.access_token;
+  // function handleGoogleLoginSuccess(tokenResponse) {
+  //   const accessToken = tokenResponse.access_token;
+  //   console.log('Google access token:', accessToken); // For debugging
+  //   signinGoogle(accessToken, navigate, setLoading);
+  // }
 
-    signinGoogle(accessToken, navigate, setLoading);
-  }
-  const login = useGoogleLogin({ onSuccess: handleGoogleLoginSuccess });
+  // const login = useGoogleLogin({
+  //   onSuccess: handleGoogleLoginSuccess,
+  //   onError: (error) => {
+  //     console.error('Google login error:', error);
+  //     toast.error('Failed to sign in with Google');
+  //   },
+  // });
 
   function handleSubmit(e) {
     e.preventDefault();
@@ -25,6 +35,11 @@ const Login = () => {
       signin({ email, password }, navigate, setLoading);
     }
   }
+
+  const handleDemoClick = () => {
+    startDemo();
+    navigate('/dashboard');
+  };
 
   return (
     <div className="login-container">

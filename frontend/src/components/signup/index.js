@@ -4,6 +4,7 @@ import { Link, useNavigate } from 'react-router-dom';
 import { useGoogleLogin } from '@react-oauth/google';
 import { signup, signupGoogle } from '../../utils';
 import { FaGoogle } from 'react-icons/fa';
+import toast from 'react-hot-toast';
 
 const InitState = {
   firstName: '',
@@ -14,7 +15,7 @@ const InitState = {
 };
 
 const Signup = () => {
-  const nagivate = useNavigate();
+  const navigate = useNavigate();
   const [sForm, setsForm] = useState(InitState);
   const [loading, setLoading] = useState(false);
 
@@ -24,11 +25,11 @@ const Signup = () => {
       [e.target.name]: e.target.value,
     });
 
-  function handleGoogleLoginSuccess(tokenResponse) {
-    const accessToken = tokenResponse.access_token;
-
-    signupGoogle(accessToken, nagivate, setLoading);
-  }
+  // function handleGoogleLoginSuccess(tokenResponse) {
+  //   const accessToken = tokenResponse.access_token;
+  //   console.log('Google access token:', accessToken); // For debugging
+  //   signupGoogle(accessToken, navigate, setLoading);
+  // }
 
   function handleOnSubmit(e) {
     e.preventDefault();
@@ -41,11 +42,18 @@ const Signup = () => {
       sForm.password === sForm.confirmPassword &&
       sForm.password.length >= 4
     ) {
-      signup(sForm, nagivate, setLoading);
+      signup(sForm, navigate, setLoading);
     }
   }
 
-  const login = useGoogleLogin({ onSuccess: handleGoogleLoginSuccess });
+  // const login = useGoogleLogin({
+  //   onSuccess: handleGoogleLoginSuccess,
+  //   onError: (error) => {
+  //     console.error('Google signup error:', error);
+  //     toast.error('Failed to sign up with Google');
+  //   },
+  // });
+
   return (
     <div className="login-container">
       <div className="auth-logo">

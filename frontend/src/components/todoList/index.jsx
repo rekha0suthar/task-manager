@@ -4,16 +4,18 @@ import Todo from '../todo';
 import './todolist.css';
 import { getTasks } from '../../api';
 import { useNavigate } from 'react-router-dom';
-import { FiCheckCircle, FiClock, FiMenu, FiX, FiUser } from 'react-icons/fi';
+import { FiCheckCircle, FiClock } from 'react-icons/fi';
+import { useDemo } from '../../context/DemoContext';
 
 const TodoList = () => {
   const [todos, setTodos] = useState([]);
   const [activeTab, setActiveTab] = useState('todo');
-  const [isSidebarOpen, setSidebarOpen] = useState(false);
+  const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
+  const { isDemo, demoTasks, setDemoTasks } = useDemo();
 
   const filteredAndSortedTodos = (completed) =>
-    todos
+    (isDemo ? demoTasks : todos)
       .filter((todo) => todo.completed === completed)
       .sort((a, b) =>
         a.dueDate && b.dueDate ? new Date(a.dueDate) - new Date(b.dueDate) : 0
@@ -22,15 +24,20 @@ const TodoList = () => {
   useEffect(() => {
     const fetchTodos = async () => {
       try {
-        const { data } = await getTasks();
-        setTodos(data);
+        if (!isDemo) {
+          setLoading(true);
+          const { data } = await getTasks();
+          setTodos(data);
+        }
       } catch (err) {
         console.log(err);
         navigate('/');
+      } finally {
+        setLoading(false);
       }
     };
     fetchTodos();
-  }, []);
+  }, [isDemo]);
 
   return (
     <>
@@ -47,7 +54,10 @@ const TodoList = () => {
         </div>
         {activeTab === 'todo' && (
           <div className="new-task-wrapper">
-            <NewTodo todos={todos} setTodos={setTodos} />
+            <NewTodo
+              todos={isDemo ? demoTasks : todos}
+              setTodos={isDemo ? setDemoTasks : setTodos}
+            />
           </div>
         )}
       </div>
@@ -77,8 +87,9 @@ const TodoList = () => {
       <div className="tasks-container">
         <Todo
           filteredAndSortedTodos={filteredAndSortedTodos}
-          setTodos={setTodos}
+          setTodos={isDemo ? setDemoTasks : setTodos}
           isCompleted={activeTab === 'completed'}
+          isDemo={isDemo}
         />
       </div>
     </>

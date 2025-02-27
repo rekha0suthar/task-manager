@@ -10,6 +10,7 @@ import {
   FiMoon,
 } from 'react-icons/fi';
 import { useTheme } from '../../context/ThemeContext';
+import { useDemo } from '../../context/DemoContext';
 import './layout.css';
 
 const DashboardLayout = () => {
@@ -17,15 +18,23 @@ const DashboardLayout = () => {
   const navigate = useNavigate();
   const location = useLocation();
   const { isDark, toggleTheme } = useTheme();
+  const { isDemo, endDemo } = useDemo();
 
   const handleLogout = () => {
-    localStorage.removeItem('token');
-    localStorage.removeItem('userId');
+    if (isDemo) {
+      endDemo();
+    } else {
+      localStorage.removeItem('token');
+      localStorage.removeItem('userId');
+    }
     navigate('/');
   };
 
   return (
     <div className="dashboard-container">
+      {isDemo && (
+        <div className="demo-banner">Demo Mode - Changes won't be saved</div>
+      )}
       <div className="mobile-header">
         <div className="mobile-header-content">
           <div className="mobile-brand">

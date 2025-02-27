@@ -1,35 +1,49 @@
-import React from 'react';
+import React, { useState } from 'react';
 import TodoItem from '../todoItem';
 import { FiInbox } from 'react-icons/fi';
+import AuthPrompt from '../common/AuthPrompt';
 import './todo.css';
 
-const Todo = ({ filteredAndSortedTodos, setTodos, isCompleted }) => {
+const Todo = ({ filteredAndSortedTodos, setTodos, isCompleted, isDemo }) => {
+  const [showAuthPrompt, setShowAuthPrompt] = useState(false);
+
+  const handleAction = (action) => {
+    if (isDemo) {
+      setShowAuthPrompt(true);
+      return false; // Prevent the action
+    }
+    return true; // Allow the action
+  };
+
   const todos = filteredAndSortedTodos(isCompleted);
 
   return (
     <div className="todo-list-wrapper">
-      {todos.length > 0 ? (
-        <ul className="todo-list">
-          {todos.map(({ _id, title, completed, dueDate }) => (
-            <TodoItem
-              key={_id}
-              id={_id}
-              title={title}
-              completed={completed}
-              dueDate={dueDate}
-              setTodos={setTodos}
-            />
-          ))}
-        </ul>
-      ) : (
+      {showAuthPrompt && (
+        <AuthPrompt onClose={() => setShowAuthPrompt(false)} />
+      )}
+
+      {todos.length === 0 ? (
         <div className="empty-state">
           <FiInbox className="empty-icon" />
           <p className="empty-text">
             {isCompleted
               ? "You haven't completed any tasks yet"
-              : 'No tasks to show. Add a new task to get started!'}
+              : "You don't have any tasks yet"}
           </p>
         </div>
+      ) : (
+        <ul className="todo-list">
+          {todos.map((todo) => (
+            <TodoItem
+              key={todo._id}
+              todo={todo}
+              setTodos={setTodos}
+              onActionAttempt={handleAction}
+              isDemo={isDemo}
+            />
+          ))}
+        </ul>
       )}
     </div>
   );

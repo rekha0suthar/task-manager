@@ -3,24 +3,32 @@ import { getUser } from '../../api';
 import { FiArrowLeft, FiMail, FiUser } from 'react-icons/fi';
 import { useNavigate } from 'react-router-dom';
 import './profile.css';
+import { useDemo } from '../../context/DemoContext';
 
 const UserProfile = () => {
   const userId = localStorage.getItem('userId');
   const [user, setUser] = useState({});
   const navigate = useNavigate();
+  const { isDemo, dummyUser } = useDemo();
 
   useEffect(() => {
     const fetchUser = async () => {
       try {
-        const { data } = await getUser(userId);
-        setUser(data);
+        if (!isDemo) {
+          const { data } = await getUser(userId);
+          setUser(data);
+        } else {
+          setUser(dummyUser);
+        }
       } catch (error) {
         console.error('Error fetching user:', error);
         navigate('/');
       }
     };
     fetchUser();
-  }, [userId, navigate]);
+  }, [userId, navigate, isDemo, dummyUser]);
+
+  const displayUser = isDemo ? dummyUser : user;
 
   return (
     <div className="profile-main">
@@ -29,11 +37,11 @@ const UserProfile = () => {
           <div className="profile-avatar">
             <img
               src="https://media.istockphoto.com/id/1300845620/vector/user-icon-flat-isolated-on-white-background-user-symbol-vector-illustration.jpg?s=612x612&w=0&k=20&c=yBeyba0hUkh14_jgv1OKqIH0CCSWU_4ckRkAoy2p73o="
-              alt={user.firstName}
+              alt={displayUser.firstName}
             />
           </div>
           <h2>
-            {user.firstName} {user.lastName}
+            {displayUser.firstName} {displayUser.lastName}
           </h2>
         </div>
 
@@ -43,7 +51,7 @@ const UserProfile = () => {
             <div className="detail-content">
               <label>Full Name</label>
               <p>
-                {user.firstName} {user.lastName}
+                {displayUser.firstName} {displayUser.lastName}
               </p>
             </div>
           </div>
@@ -52,7 +60,7 @@ const UserProfile = () => {
             <FiMail className="detail-icon" />
             <div className="detail-content">
               <label>Email</label>
-              <p>{user.email}</p>
+              <p>{displayUser.email}</p>
             </div>
           </div>
         </div>
