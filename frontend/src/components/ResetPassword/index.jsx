@@ -2,7 +2,8 @@ import React, { useState } from 'react';
 import { resetPassword } from '../../api';
 import { useNavigate } from 'react-router-dom';
 import { FiArrowLeft } from 'react-icons/fi';
-import './resetpassword.css';
+import Navbar from '../navbar';
+import '../forgotPassword/forgotpassword.css';
 
 const ResetPassword = () => {
   const [confirmPassword, setConfirmPassword] = useState('');
@@ -27,12 +28,9 @@ const ResetPassword = () => {
   };
 
   return (
-    <div className="login-container">
-      <div className="auth-logo">
-        <h1>Taskify</h1>
-        <p>Organize your tasks, simplify your life</p>
-      </div>
-      <div className="login-containerv2">
+    <div className="login-signup-container">
+      <Navbar />
+      <div className="login-signup-containerv2">
         <button
           className="back-link"
           onClick={() => navigate('/forgot-password')}
@@ -63,7 +61,7 @@ const ResetPassword = () => {
             required
           />
         </div>
-        <button className="login-btn" onClick={handleResetPassword}>
+        <button className="login-signup-btn" onClick={handleResetPassword}>
           {loading ? 'Resetting password...' : 'Reset Password'}
         </button>
       </div>

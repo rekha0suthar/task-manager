@@ -1,0 +1,41 @@
+.auth-logo {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  background-color: var(--bg-secondary);
+  border-bottom: 1px solid var(--border-color);
+  padding: 1rem;
+  z-index: 10;
+}
+
+.auth-logo-content {
+  max-width: 400px;
+  width: 100%;
+}
+
+.auth-logo h1 {
+  font-size: 2rem;
+  font-weight: 700;
+  background: linear-gradient(45deg, #3b82f6, #8b5cf6);
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  margin-bottom: 0.25rem;
+  margin-top: 0px;
+}
+
+.auth-logo p {
+  color: var(--text-secondary);
+  font-size: 0.875rem;
+}
+
+@media (max-width: 640px) {
+  .auth-logo {
+    padding: 1rem;
+  }
+
+  .auth-logo h1 {
+    font-size: 1.75rem;
+  }
+}
