@@ -1,10 +1,7 @@
 import React, { useState } from 'react';
-import './signup.css';
 import { Link, useNavigate } from 'react-router-dom';
-import { useGoogleLogin } from '@react-oauth/google';
-import { signup, signupGoogle } from '../../utils';
-import { FaGoogle } from 'react-icons/fa';
-import toast from 'react-hot-toast';
+import { signup } from '../../utils';
+import Navbar from '../navbar';
 
 const InitState = {
   firstName: '',
@@ -25,12 +22,6 @@ const Signup = () => {
       [e.target.name]: e.target.value,
     });
 
-  // function handleGoogleLoginSuccess(tokenResponse) {
-  //   const accessToken = tokenResponse.access_token;
-  //   console.log('Google access token:', accessToken); // For debugging
-  //   signupGoogle(accessToken, navigate, setLoading);
-  // }
-
   function handleOnSubmit(e) {
     e.preventDefault();
     if (
@@ -45,22 +36,10 @@ const Signup = () => {
       signup(sForm, navigate, setLoading);
     }
   }
-
-  // const login = useGoogleLogin({
-  //   onSuccess: handleGoogleLoginSuccess,
-  //   onError: (error) => {
-  //     console.error('Google signup error:', error);
-  //     toast.error('Failed to sign up with Google');
-  //   },
-  // });
-
   return (
-    <div className="login-container">
-      <div className="auth-logo">
-        <h1>Taskify</h1>
-        <p>Organize your tasks, simplify your life</p>
-      </div>
-      <div className="login-containerv2">
+    <div className="login-signup-signup-container">
+      <Navbar />
+      <div className="login-signup-containerv2">
         <h2>Create your account</h2>
 
         <div className="input-container">
@@ -111,16 +90,10 @@ const Signup = () => {
           />
         </div>
 
-        <button onClick={handleOnSubmit} className="login-btn">
+        <button onClick={handleOnSubmit} className="login-signup-btn">
           {loading ? 'Registering, please wait' : 'REGISTER'}
         </button>
-        {/* Disabled Google Signup
-        <span className="or">or</span>
-        <button onClick={() => login()} className="google-btn">
-          <FaGoogle />{' '}
-          {loading ? 'Signing in, please wait' : 'Sign up with google'}
-        </button> 
-        */}
+
         <span className="notreg">
           Already Signed Up?{' '}
           <Link className="signup-btn" to="/">
