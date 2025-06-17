@@ -1,9 +1,9 @@
 import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import { signup } from '../../utils';
+import { signup, isValidForm } from '../../utils/signUpUtils';
 import Navbar from '../navbar';
 
-const InitState = {
+const initialFormState = {
   firstName: '',
   lastName: '',
   email: '',
@@ -13,85 +13,58 @@ const InitState = {
 
 const Signup = () => {
   const navigate = useNavigate();
-  const [sForm, setsForm] = useState(InitState);
+  const [formData, setFormData] = useState(initialFormState);
   const [loading, setLoading] = useState(false);
 
-  const handleChange = (e) =>
-    setsForm({
-      ...sForm,
+  const handleChange = (e) => {
+    setFormData((prev) => ({
+      ...prev,
       [e.target.name]: e.target.value,
-    });
+    }));
+  };
 
-  function handleOnSubmit(e) {
+  const handleSubmit = (e) => {
     e.preventDefault();
-    if (
-      sForm.firstName !== '' &&
-      sForm.lastName !== '' &&
-      sForm.password !== '' &&
-      sForm.confirmPassword !== '' &&
-      sForm.email !== '' &&
-      sForm.password === sForm.confirmPassword &&
-      sForm.password.length >= 4
-    ) {
-      signup(sForm, navigate, setLoading);
-    }
-  }
+    if (!isValidForm()) return;
+
+    signup(formData, navigate, setLoading);
+  };
+
   return (
     <div className="login-signup-signup-container">
       <Navbar />
       <div className="login-signup-containerv2">
         <h2>Create your account</h2>
 
-        <div className="input-container">
-          <label>FIRST NAME</label>
-          <input
-            onChange={handleChange}
-            name="firstName"
-            placeholder="Enter your first name"
-            type="text"
-          />
-        </div>
-        <div className="input-container">
-          <label>LAST NAME</label>
-          <input
-            name="lastName"
-            onChange={handleChange}
-            placeholder="Enter your last name"
-            type="text"
-          />
-        </div>
-        <div className="input-container">
-          <label>EMAIL</label>
-          <input
-            name="email"
-            onChange={handleChange}
-            placeholder="Enter your email"
-            type="email"
-          />
-        </div>
+        {['firstName', 'lastName', 'email', 'password', 'confirmPassword'].map(
+          (field, idx) => (
+            <div key={idx} className="input-container">
+              <label>{field.replace(/([A-Z])/g, ' $1').toUpperCase()}</label>
+              <input
+                name={field}
+                type={
+                  field.includes('password')
+                    ? 'password'
+                    : field === 'email'
+                    ? 'email'
+                    : 'text'
+                }
+                placeholder={`Enter your ${field
+                  .replace(/([A-Z])/g, ' ')
+                  .toLowerCase()}`}
+                value={formData[field]}
+                onChange={handleChange}
+              />
+            </div>
+          )
+        )}
 
-        <div className="input-container">
-          <label>PASSWORD</label>
-          <input
-            name="password"
-            onChange={handleChange}
-            placeholder="Enter your password"
-            type="password"
-          />
-        </div>
-
-        <div className="input-container">
-          <label>CONFIRM PASSWORD</label>
-          <input
-            name="confirmPassword"
-            onChange={handleChange}
-            placeholder="Re-type your password"
-            type="password"
-          />
-        </div>
-
-        <button onClick={handleOnSubmit} className="login-signup-btn">
-          {loading ? 'Registering, please wait' : 'REGISTER'}
+        <button
+          onClick={handleSubmit}
+          className="login-signup-btn"
+          disabled={loading}
+        >
+          {loading ? 'Registering, please wait...' : 'REGISTER'}
         </button>
 
         <span className="notreg">

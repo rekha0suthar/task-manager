@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { getUser } from '../../api';
-import { FiArrowLeft, FiMail, FiUser } from 'react-icons/fi';
+import { FiMail, FiUser } from 'react-icons/fi';
 import { useNavigate } from 'react-router-dom';
 import './profile.css';
 import { useDemo } from '../../context/DemoContext';

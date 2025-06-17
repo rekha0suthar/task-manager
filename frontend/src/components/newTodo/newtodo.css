@@ -73,7 +73,7 @@
 }
 
 .date-picker-wrapper {
-  padding: 12px 16px;
+  padding: 5px;
   margin-top: 8px;
   border-top: 1px solid #e2e8f0;
   animation: slideDown 0.2s ease-out;
@@ -88,6 +88,7 @@
   color: #1e293b;
   outline: none;
   transition: all 0.2s ease;
+  box-sizing: border-box;
 }
 
 .date-input:focus {

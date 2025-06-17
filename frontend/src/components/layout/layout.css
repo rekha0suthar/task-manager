@@ -187,12 +187,6 @@ body {
   -webkit-text-fill-color: transparent;
 }
 
-/* Update task tabs styles */
-.task-tabs {
-  background-color: var(--bg-secondary);
-  border: 1px solid var(--border-color);
-}
-
 .tab-btn {
   color: var(--text-secondary);
 }

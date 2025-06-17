@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import './login.css';
-import { signin } from '../../utils';
+import { signin } from '../../utils/signInUtils';
 import { useDemo } from '../../context/DemoContext';
 import Navbar from '../navbar';
 
@@ -13,12 +13,12 @@ const Login = () => {
   const { startDemo } = useDemo();
   const navigate = useNavigate();
 
-  function handleSubmit(e) {
+  const handleSubmit = (e) => {
     e.preventDefault();
     if (email !== '' && password !== '') {
       signin({ email, password }, navigate, setLoading);
     }
-  }
+  };
 
   const handleDemoClick = () => {
     startDemo();
