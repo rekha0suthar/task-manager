@@ -14,16 +14,9 @@ API.interceptors.request.use((req) => {
 
 // User APIs
 export const signIn = (data) => API.post('/users/signin', data);
-export const signInGoogle = (accessToken) =>
-  API.post('/users/signin', {
-    googleAccessToken: accessToken,
-  });
 
 export const signUp = (data) => API.post('/users/signup', data);
-export const signUpGoogle = (accessToken) =>
-  API.post('/users/signup', {
-    googleAccessToken: accessToken,
-  });
+
 export const resetPassword = (data) => API.put('/users/reset-password', data);
 export const getUser = (userId) => API.get(`/users/${userId}`);
 
