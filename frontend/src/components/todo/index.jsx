@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import TodoItem from '../todoItem';
 import { FiInbox } from 'react-icons/fi';
 import AuthPrompt from '../common/AuthPrompt';
-import './todo.css';
+import '../../styles/todo.css';
 
 const Todo = ({ filteredAndSortedTodos, setTodos, isCompleted, isDemo }) => {
   const [showAuthPrompt, setShowAuthPrompt] = useState(false);

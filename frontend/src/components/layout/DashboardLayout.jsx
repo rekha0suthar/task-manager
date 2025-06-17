@@ -11,7 +11,7 @@ import {
 } from 'react-icons/fi';
 import { useTheme } from '../../context/ThemeContext';
 import { useDemo } from '../../context/DemoContext';
-import './layout.css';
+import '../../styles/layout.css';
 
 const DashboardLayout = () => {
   const [isSidebarOpen, setSidebarOpen] = useState(false);

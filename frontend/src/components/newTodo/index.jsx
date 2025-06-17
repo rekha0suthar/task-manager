@@ -1,8 +1,8 @@
 import React from 'react';
-import './newtodo.css';
 import { FiCalendar, FiPlus } from 'react-icons/fi';
 import AuthPrompt from '../common/AuthPrompt';
 import useNewTodoForm from '../../customHooks/useNewTodoForm';
+import '../../styles/newtodo.css';
 
 const NewTodo = ({ todos, setTodos, isDemo }) => {
   const {

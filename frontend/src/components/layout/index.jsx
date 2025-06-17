@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
 import { FiClock, FiMenu, FiX, FiUser } from 'react-icons/fi';
-import './layout.css';
+import '../../styles/layout.css';
 
 const Layout = ({ children }) => {
   const [isSidebarOpen, setSidebarOpen] = useState(false);

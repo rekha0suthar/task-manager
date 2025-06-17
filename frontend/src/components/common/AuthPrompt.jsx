@@ -1,6 +1,6 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
-import './AuthPrompt.css';
+import '../../styles/authprompt.css';
 
 const AuthPrompt = ({ onClose }) => {
   const navigate = useNavigate();

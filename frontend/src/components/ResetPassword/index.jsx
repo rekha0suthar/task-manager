@@ -1,9 +1,9 @@
 import React, { useState } from 'react';
-import { resetPassword } from '../../api';
+import { resetPasswordApi } from '../../api';
 import { useNavigate } from 'react-router-dom';
 import { FiArrowLeft } from 'react-icons/fi';
 import Navbar from '../navbar';
-import '../forgotPassword/forgotpassword.css';
+import '../../styles/forgotpassword.css';
 
 const ResetPassword = () => {
   const [confirmPassword, setConfirmPassword] = useState('');
@@ -17,7 +17,7 @@ const ResetPassword = () => {
     try {
       if (password === confirmPassword) {
         setLoading(true);
-        await resetPassword({ email, password });
+        await resetPasswordApi({ email, password });
         navigate('/');
       }
     } catch (err) {

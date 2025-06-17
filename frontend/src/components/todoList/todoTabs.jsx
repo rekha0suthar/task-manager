@@ -1,6 +1,5 @@
-import React from 'react';
 import NewTodo from '../newTodo';
-import './todolist.css';
+import '../../styles/todolist.css';
 
 const TodoTabs = ({ activeTab, taskCount, isDemo, tasks, setTasks }) => (
   <div className="dashboard-header">

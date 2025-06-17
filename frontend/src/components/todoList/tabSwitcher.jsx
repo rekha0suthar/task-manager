@@ -1,4 +1,3 @@
-import React from 'react';
 import { FiClock, FiCheckCircle } from 'react-icons/fi';
 
 const TabSwitcher = ({

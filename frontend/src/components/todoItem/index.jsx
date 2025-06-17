@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { MdDelete, MdEdit } from 'react-icons/md';
 import { FaCheck } from 'react-icons/fa6';
 import { IoClose } from 'react-icons/io5';
-import './todoitem.css';
+import '../../styles/todoitem.css';
 
 import { getDueDateLabel, getDueDateClass } from '../../utils/todoUtils';
 import useTodoActions from '../../customHooks/useTodoActions';

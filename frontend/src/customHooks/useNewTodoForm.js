@@ -1,8 +1,8 @@
 import { useState } from 'react';
-import { addTask } from '../api';
+import { addTaskApi } from '../api';
 import { showSuccessToast, showErrorToast } from '../utils/toastUtils';
 
-const useNewTodoForm = ({ todos, setTodos, isDemo }) => {
+const useNewTodoForm = ({ setTodos, isDemo }) => {
   const [title, setTitle] = useState('');
   const [dueDate, setDueDate] = useState('');
   const [isDatePickerVisible, setIsDatePickerVisible] = useState(false);
@@ -32,7 +32,7 @@ const useNewTodoForm = ({ todos, setTodos, isDemo }) => {
 
     if (!isDemo) {
       try {
-        const { data } = await addTask(newTask);
+        const { data } = await addTaskApi(newTask);
         setTodos((prev) =>
           prev.map((todo) => (todo._id === newTask._id ? data : todo))
         );

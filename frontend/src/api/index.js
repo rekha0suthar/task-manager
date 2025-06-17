@@ -13,16 +13,17 @@ API.interceptors.request.use((req) => {
 });
 
 // User APIs
-export const signIn = (data) => API.post('/users/signin', data);
+export const signInApi = (data) => API.post('/users/signin', data);
 
-export const signUp = (data) => API.post('/users/signup', data);
+export const signUpApi = (data) => API.post('/users/signup', data);
 
-export const resetPassword = (data) => API.put('/users/reset-password', data);
-export const getUser = (userId) => API.get(`/users/${userId}`);
+export const resetPasswordApi = (data) =>
+  API.put('/users/reset-password', data);
+export const getUserApi = (userId) => API.get(`/users/${userId}`);
 
 //Task APIs
-export const addTask = (newTask) => API.post('/tasks/', newTask);
-export const getTasks = () => API.get('/tasks/');
-export const updateTask = (taskId, update) =>
+export const addTaskApi = (newTask) => API.post('/tasks/', newTask);
+export const getTasksApi = () => API.get('/tasks/');
+export const updateTaskApi = (taskId, update) =>
   API.put(`/tasks/${taskId}`, update);
-export const deleteTask = (taskId) => API.delete(`/tasks/${taskId}`);
+export const deleteTaskApi = (taskId) => API.delete(`/tasks/${taskId}`);

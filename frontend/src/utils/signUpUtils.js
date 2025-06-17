@@ -1,10 +1,10 @@
-import { signUp } from '../api';
+import { signUpApi } from '../api';
 import { showErrorToast, showSuccessToast } from './toastUtils';
 
 export const signup = async (formData, navigate, setLoading) => {
   try {
     setLoading(true);
-    await signUp(formData);
+    await signUpApi(formData);
     showSuccessToast('Sign up successfully');
 
     navigate('/');

@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from 'react';
-import { getUser } from '../../api';
+import { getUserApi } from '../../api';
 import { FiMail, FiUser } from 'react-icons/fi';
 import { useNavigate } from 'react-router-dom';
-import './profile.css';
 import { useDemo } from '../../context/DemoContext';
+import '../../styles/profile.css';
 
 const UserProfile = () => {
   const userId = localStorage.getItem('userId');
@@ -15,7 +15,7 @@ const UserProfile = () => {
     const fetchUser = async () => {
       try {
         if (!isDemo) {
-          const { data } = await getUser(userId);
+          const { data } = await getUserApi(userId);
           setUser(data);
         } else {
           setUser(dummyUser);

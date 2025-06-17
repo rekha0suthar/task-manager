@@ -1,8 +1,9 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { FiArrowLeft } from 'react-icons/fi';
-import './forgotpassword.css';
 import Navbar from '../navbar';
+import '../../styles/forgotpassword.css';
+import InputContainer from '../common/InputContainer';
 
 const ForgotPassword = () => {
   const [email, setEmail] = useState('');
@@ -28,16 +29,13 @@ const ForgotPassword = () => {
           Enter your email address and continue to reset your password.
         </p>
 
-        <div className="input-container">
-          <label>EMAIL</label>
-          <input
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-            placeholder="Enter your email"
-            type="email"
-            required
-          />
-        </div>
+        <InputContainer
+          label="EMAIL"
+          inputValue={email}
+          setState={(e) => setEmail(e.target.value)}
+          type="email"
+          placeholder="Enter your email address"
+        />
         <button className="login-signup-btn" onClick={handleForgetPassword}>
           {loading ? 'Sending reset link...' : 'Reset Password'}
         </button>

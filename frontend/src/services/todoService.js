@@ -1,8 +1,8 @@
-import { getTasks } from '../api';
+import { getTasksApi } from '../api';
 
 const taskService = {
   getAll: async () => {
-    const { data } = await getTasks();
+    const { data } = await getTasksApi();
     return data;
   },
 };

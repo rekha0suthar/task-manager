@@ -1,4 +1,4 @@
-import { updateTask, deleteTask } from '../api';
+import { updateTaskApi, deleteTaskApi } from '../api';
 import { showErrorToast, showSuccessToast } from '../utils/toastUtils';
 
 const useTodoActions = ({ todo, setTodos, onActionAttempt, isDemo }) => {
@@ -7,7 +7,7 @@ const useTodoActions = ({ todo, setTodos, onActionAttempt, isDemo }) => {
 
     try {
       if (!isDemo) {
-        await updateTask(todo._id, { title: newTitle });
+        await updateTaskApi(todo._id, { title: newTitle });
         showSuccessToast('Task updated successfully');
       }
       setTodos((prev) =>
@@ -24,7 +24,7 @@ const useTodoActions = ({ todo, setTodos, onActionAttempt, isDemo }) => {
 
     try {
       if (!isDemo) {
-        await updateTask(todo._id, { completed: !todo.completed });
+        await updateTaskApi(todo._id, { completed: !todo.completed });
       }
       setTodos((prev) =>
         prev.map((t) =>
@@ -41,7 +41,7 @@ const useTodoActions = ({ todo, setTodos, onActionAttempt, isDemo }) => {
 
     try {
       if (!isDemo) {
-        await deleteTask(todo._id);
+        await deleteTaskApi(todo._id);
         showSuccessToast('Task deleted successfully');
       }
       setTodos((prev) => prev.filter((t) => t._id !== todo._id));

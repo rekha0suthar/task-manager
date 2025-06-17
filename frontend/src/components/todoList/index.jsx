@@ -1,15 +1,13 @@
-import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useState } from 'react';
 import { useDemo } from '../../context/DemoContext';
 import useTodos from '../../customHooks/useTodo';
 import TodoTabs from './todoTabs';
 import TabSwitcher from './tabSwitcher';
 import TodoContainer from './todoContainer';
-import './todolist.css';
+import '../../styles/todolist.css';
 
 const TodoList = () => {
   const [activeTab, setActiveTab] = useState('todo');
-  const navigate = useNavigate();
   const { isDemo, demoTasks, setDemoTasks } = useDemo();
 
   const { tasks, updateTasks, loading } = useTodos(

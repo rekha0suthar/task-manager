@@ -1,9 +1,10 @@
 import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import './login.css';
 import { signin } from '../../utils/signInUtils';
 import { useDemo } from '../../context/DemoContext';
 import Navbar from '../navbar';
+import '../../styles/login.css';
+import InputContainer from '../common/InputContainer';
 
 const Login = () => {
   const [email, setEmail] = useState('');
@@ -31,25 +32,21 @@ const Login = () => {
       <div className="login-signup-containerv2">
         <h2>Welcome back</h2>
 
-        <div className="input-container">
-          <label>EMAIL</label>
-          <input
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-            placeholder="Enter your email"
-            type="email"
-          />
-        </div>
+        <InputContainer
+          label="EMAIL"
+          inputValue={email}
+          setState={(e) => setEmail(e.target.value)}
+          type="email"
+          placeholder="Enter your email address"
+        />
 
-        <div className="input-container">
-          <label>PASSWORD</label>
-          <input
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-            placeholder="Enter your password"
-            type="password"
-          />
-        </div>
+        <InputContainer
+          label="PASSWORD"
+          inputValue={password}
+          setState={(e) => setPassword(e.target.value)}
+          type="password"
+          placeholder="Enter your password"
+        />
 
         <div className="forgetme-container">
           <div>

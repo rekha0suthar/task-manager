@@ -1,10 +1,10 @@
-import { signIn } from '../api';
+import { signInApi } from '../api';
 import { showErrorToast, showSuccessToast } from './toastUtils';
 
-export const signin = async (data2, navigate, setLoading) => {
+export const signin = async (user_credentails, navigate, setLoading) => {
   try {
     setLoading(true);
-    const { data } = await signIn(data2);
+    const { data } = await signInApi(user_credentails);
     localStorage.setItem('token', data.token);
     localStorage.setItem('userId', data.result?._id);
     showSuccessToast('Sign in successfully');
